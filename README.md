@@ -6,6 +6,7 @@ This document outlines the setup and usage of ZenHub's public API: a RESTful API
 - [Authentication](#authentication)
 - [Endpoints](#endpoints)
   - [Get issue data](#get-issue-data)
+  - [Get issue events](#get-issue-events)
   - [Get the ZenHub Board data for a repository](#get-the-zenhub-board-data-for-a-repository)
 - [API limits](#api-limits)
 - [Errors](#errors)
@@ -26,16 +27,14 @@ The token is sent in the `X-Authentication-Token` header. For example, using `cu
 GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number
 ```
 
-Remember, the `repo_id` is the ID of the repository, not the full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
-You can use [GitHub's API](https://developer.github.com/v3/repos/#get) to find out the ID of your repository.
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
 
-The issue number is the same as displayed in your GitHub Issues page. 
+Issue number is the same as displayed in your GitHub Issues page. For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
 
-For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
+The endpoint returns that issue's assigned _Time Estimate_ (if applicable), its _Pipeline_ in the Board, as well as any _+1s_.
 
-The endpoint returns that issue's assigned _Time Estimate_, the _Pipeline_ where it sits in the Board, as well as any _+1s_.
-
-This is an example of returned JSON data:
+Here is an example of returned JSON data:
 ```json
 {
   "estimate": {
@@ -53,6 +52,70 @@ This is an example of returned JSON data:
 }
 ```
 
+### Get issue events
+
+```
+GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/events
+```
+
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
+
+Issue number is the same as displayed in your GitHub Issues page. For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
+
+The endpoint returns that issue's events, sorted by most recent. Each event contains the _User ID_ of the person who performed the change, the _Creation Date_ of the event, and _Type_. Type can be either `estimateIssue` or `transferIssue`. Old and new values are included for both event types.
+
+Here is an example of returned JSON data:
+```json
+[
+  {
+    "user_id": 16717,
+    "type": "estimateIssue",
+    "created_at": "2015-12-11T19:43:22.296Z",
+    "from_estimate": {
+      "value": 8
+    }
+  },
+  {
+    "user_id": 16717,
+    "type": "estimateIssue",
+    "created_at": "2015-12-11T18:43:22.296Z",
+    "from_estimate": {
+      "value": 4
+    },
+    "to_estimate": {
+      "value": 8
+    }
+  },
+  {
+    "user_id": 16717,
+    "type": "estimateIssue",
+    "created_at": "2015-12-11T13:43:22.296Z",
+    "to_estimate": {
+      "value": 4
+    }
+  },
+  {
+    "user_id": 16717,
+    "type": "transferIssue",
+    "created_at": "2015-12-11T12:43:22.296Z",
+    "from_pipeline": {
+      "name": "Backlog"
+    },
+    "to_pipeline": {
+      "name": "In progress"
+    }
+  },
+  {
+    "user_id": 16717,
+    "type": "transferIssue",
+    "created_at": "2015-12-11T11:43:22.296Z",
+    "to_pipeline": {
+      "name": "Backlog"
+    }
+  }
+]
+```
 
 ### Get the ZenHub Board data for a repository
 
