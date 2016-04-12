@@ -34,6 +34,8 @@ Issue number is the same as displayed in your GitHub Issues page. For example, t
 
 The endpoint returns that issue's assigned _Time Estimate_ (if applicable), its _Pipeline_ in the Board, as well as any _+1s_.
 
+NOTE: Closed issues might take up to 1 minute to show up in the Closed pipeline. Similarly reopened issues might take up to 1 minute to show in the right pipeline.
+
 Here is an example of returned JSON data:
 ```json
 {
@@ -131,6 +133,8 @@ The endpoint returns the Board's pipelines, plus the issues contained within eac
 
 Even if the issues are returned in the right order, the _position_ can't be guessed from its index. Notice some issues won't have _position_ – this is because they have not been prioritized in the Board. 
 
+Note: Closed issues might take up to 1 minute to show up in the Closed pipeline. Similarly reopened issues might take up to 1 minute to show in the right pipeline.
+
 This is an example of returned JSON data:
 ```json
 {
@@ -191,7 +195,7 @@ This is an example of returned JSON data:
 
 ## API limits
 
-We allow 10 requests per minute to our API. All requests responses include some headers related to this limitation.
+We allow 100 requests per minute to our API. All requests responses include some headers related to this limitation.
 
 Header | Meaning
 ------ | -------
