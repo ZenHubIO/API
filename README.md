@@ -7,10 +7,10 @@ This document outlines the setup and usage of ZenHub's public API: a RESTful API
 - [Endpoints](#endpoints)
   - [Get issue data](#get-issue-data)
   - [Get issue events](#get-issue-events)
-  - [Get Epics for a repository](#get-repo-epics)
-  - [Get Epic data](#get-epic-data)
   - [Get the ZenHub Board data for a
    repository](#get-the-zenhub-board-data-for-a-repository)
+  - [Get Epics for a repository](#get-epics-for-a-repository)
+  - [Get Epic data](#get-epic-data)
 - [API limits](#api-limits)
 - [Errors](#errors)
 - [Contact us](#contact-us)
