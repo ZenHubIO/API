@@ -1,7 +1,7 @@
 
 # Zenhub API
 
-This document outlines the setup and usage of ZenHub's public API: a RESTful API with JSON responses.
+This document outlines the setup and usage of ZenHub's API: a RESTful API with JSON responses.
 
 - [Authentication](#authentication)
 - [Endpoints](#endpoints)
@@ -30,6 +30,9 @@ Please follow the instruction in https://{{zenhub_enterprise_host}}/setup/howto/
 
 ### Get issue data
 
+Here are the current endpoints available for ZenHub's API. 
+
+
 ```
 GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number
 ```
@@ -41,7 +44,7 @@ Issue number is the same as displayed in your GitHub Issues page. For example, t
 
 The endpoint returns that issue's assigned _Time Estimate_ (if applicable), its _Pipeline_ in the Board, an _is epic_ flag (true/false), as well as any _+1s_.
 
-NOTE: Closed issues might take up to 1 minute to show up in the Closed pipeline. Similarly reopened issues might take up to 1 minute to show in the right pipeline.
+NOTE: Closed issues might take up to one minute to show up in the Closed pipeline. Similarly, reopened issues might take up to one minute to show in the right pipeline.
 
 Here is an example of returned JSON data:
 ```json
@@ -71,7 +74,7 @@ GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/events
 Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
 To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
 
-Issue number is the same as displayed in your GitHub Issues page. For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
+Issue number is the same one displayed in your GitHub Issues page. For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
 
 The endpoint returns that issue's events, sorted by most recent. Each event contains the _User ID_ of the person who performed the change, the _Creation Date_ of the event, and _Type_. Type can be either `estimateIssue` or `transferIssue`. Old and new values are included for both event types.
 
@@ -137,11 +140,11 @@ Note: The `repo_id` is the ID of the repository, not the full name. For example,
 
 For example, the URL to fetch the [ZenHubIO/support](https://github.com/ZenHubIO/support#boards) board would be `https://api.zenhub.io/p1/repositories/13550592/board`.
 
-The endpoint returns the Board's pipelines, plus the issues contained within each pipeline. For each issue it returns the _issue number_, its _position_ in the board, an _is epic_ flag(true/false), and its _Time Estimate_ (if one is assigned).
+The endpoint returns the Board's pipelines, plus the issues contained within each pipeline. It returns each issues' _issue number_, its _position_ in the board, an _is epic_ flag(true/false), and its _Time Estimate_ (if one is assigned).
 
-Even if the issues are returned in the right order, the _position_ can't be guessed from its index. Notice some issues won't have _position_ – this is because they have not been prioritized in the Board.
+Even if the issues are returned in the right order, the _position_ can't be guessed from its index. Notice some issues won't have _position_ – this is because they have not been prioritized on your Board.
 
-Note: Closed issues might take up to 1 minute to show up in the Closed pipeline. Similarly reopened issues might take up to 1 minute to show in the right pipeline.
+Note: Closed issues might take up to one minute to show up in the Closed pipeline. Similarly, reopened issues might take up to one  minute to show in the right pipeline.
 
 This is an example of returned JSON data:
 ```json
@@ -220,7 +223,7 @@ For example, the URL to fetch the [ZenHubIO/support](https://github.com/ZenHubIO
 
 The endpoint returns an array of the repository's epics. For each epic, _issue number_, _repository ID_, and the _GitHub issue URL_ is provided.
 
-Note: If an issue is only an issue belonging to an epic (and not an epic itself), it is not an epic, and will not be included in the return array.
+Note: If an issue is only an issue belonging to an epic (and not a parent epic), it is not considered an epic and won't be included in the return array. 
 
 Here is an example of returned JSON data:
 
@@ -251,9 +254,9 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 `epic_id` is the GitHub issue number (you may fetch the list of epics using **Get Epics for a repository** endpoint).
 
-The endpoint returns the _total estimate epic value_ (estimate of epic + all issue estimates belonging to it summed), the _estimate of the epic_, _pipeline name_ the epic issue is in, and the _issues_ belonging to it. For each issue belonging to the epic, its _issue number_, _repo id_, _estimate value_, _is epic_ flag (true/false) are provided; in addition, if the issue is from the same repository as the epic, the ZenHub Board's _pipeline name_ (from the repo the epic is in) is attached.
+The endpoint returns the _total estimate epic value_ (the sum of the epic's estimate, plus all estimates contained within it), the _estimate of the epic_, _pipeline name_ the epic is in, and the _issues_ belonging to it. For each issue belonging to the epic, its _issue number_, _repo id_, _estimate value_, _is epic_ flag (true/false) are provided; in addition, if the issue is from the same repository as the epic, the ZenHub Board's _pipeline name_ (from the repo the epic is in) is attached.
 
-NOTE: if an issue belonging to the epic is from a different repository than the epic, the pipeline name is not attached.
+NOTE: If an issue is from a different repository than the epic it belongs to, the pipeline name is not attached. 
 
 ```json
 {
