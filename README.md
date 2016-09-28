@@ -13,6 +13,7 @@ This document outlines the setup and usage of ZenHub's API: a RESTful API with J
   - [Get Epic data](#get-epic-data)
 - [API limits](#api-limits)
 - [Errors](#errors)
+- [Webhooks](#webhooks)
 - [Contact us](#contact-us)
 
 ## Authentication
@@ -30,7 +31,7 @@ Please follow the instruction in https://{{zenhub_enterprise_host}}/setup/howto/
 
 ### Get issue data
 
-Here are the current endpoints available for ZenHub's API. 
+Here are the current endpoints available for ZenHub's API.
 
 
 ```
@@ -223,7 +224,7 @@ For example, the URL to fetch the [ZenHubIO/support](https://github.com/ZenHubIO
 
 The endpoint returns an array of the repository's epics. For each epic, _issue number_, _repository ID_, and the _GitHub issue URL_ is provided.
 
-Note: If an issue is only an issue belonging to an epic (and not a parent epic), it is not considered an epic and won't be included in the return array. 
+Note: If an issue is only an issue belonging to an epic (and not a parent epic), it is not considered an epic and won't be included in the return array.
 
 Here is an example of returned JSON data:
 
@@ -256,7 +257,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 The endpoint returns the _total estimate epic value_ (the sum of the epic's estimate, plus all estimates contained within it), the _estimate of the epic_, _pipeline name_ the epic is in, and the _issues_ belonging to it. For each issue belonging to the epic, its _issue number_, _repo id_, _estimate value_, _is epic_ flag (true/false) are provided; in addition, if the issue is from the same repository as the epic, the ZenHub Board's _pipeline name_ (from the repo the epic is in) is attached.
 
-NOTE: If an issue is from a different repository than the epic it belongs to, the pipeline name is not attached. 
+NOTE: If an issue is from a different repository than the epic it belongs to, the pipeline name is not attached.
 
 ```json
 {
@@ -334,6 +335,105 @@ Status Code | Meaning
 401 | The token is not valid. See [Authentication](#authentication).
 403 | Reached request limit to the API. See [API Limits](#api-limits).
 404 | Not found.
+
+
+## Webhooks
+
+You can use our webhooks to fetch or store your ZenHub data, in real time, across services like Slack, Gitter, Spark, HipChat, or something custom!
+
+To set up an integration, head on over to our [Dashboard](https://dashboard.zenhub.com/), navigate to your organization, and select the **Integrations** tab. From there, you may choose one of the 5 services (Slack, HipChat, Gitter, Spark, or Custom).
+
+For instructions, you'll notice the `How to create a webhook` link changes dynamically based on the service you select. Simply choose a repository with which to connect, add an optional description, paste your webhook, and click "Add" to save your new integration.
+
+<img src="https://cloud.githubusercontent.com/assets/8771909/18925366/937133e2-8568-11e6-9f6a-da09edd63d16.jpg" alt=ZenHub integrations>
+
+### Custom webhooks
+
+Our custom webhook sends a POST request to your webhook for multiple events that occur on your ZenHub board:
+
+#### Issue transfer
+
+```json
+{
+  "type": "issue_transfer",
+  "github_url": "https://github.com/ZenHubIO/support/issues/618",
+  "organization": "ZenHubHQ",
+  "repo": "support",
+  "user_name": "ZenHubIO",
+  "issue_number": "618",
+  "issue_title": "ZenHub Change Log",
+  "to_pipeline_name": "New Issues",
+  "from_pipeline_name": "Discussion"
+}
+```
+
+#### Estimate Set
+
+```json
+{
+  "type": "estimate_set",
+  "github_url": "https://github.com/ZenHubIO/support/issues/618",
+  "organization": "ZenHubHQ",
+  "repo": "support",
+  "user_name": "ZenHubIO",
+  "issue_number": "618",
+  "issue_title": "ZenHub Change Log",
+  "estimate": "8"
+}
+```
+
+#### Estimate Cleared
+
+```json
+{
+  "type": "estimate_cleared",
+  "github_url": "https://github.com/ZenHubIO/support/issues/618",
+  "organization": "ZenHubHQ",
+  "repo": "support",
+  "user_name": "ZenHubIO",
+  "issue_number": "618",
+  "issue_title": "ZenHub Change Log",
+}
+```
+
+#### Issue Reprioritized
+
+```json
+{
+  "type": "issue_reprioritized",
+  "github_url": "https://github.com/ZenHubIO/support/issues/618",
+  "organization": "ZenHubHQ",
+  "repo": "support",
+  "user_name": "ZenHubIO",
+  "issue_number": "618",
+  "issue_title": "ZenHub Change Log",
+  "to_pipeline_name": "Backlog",
+  "from_position": "4",
+  "to_position": "0"
+}
+```
+
+
+As an example, here's a simple Node/Express app that would be able receive the webhooks(using ngrok):
+
+```
+var express       = require('express');
+var http          = require('http');
+var bodyParser    = require('body-parser');
+var app           = express();
+
+http.createServer(app).listen('6000', function(){
+ console.log('Listening on 6000');
+});
+
+app.use(bodyParser());
+
+
+app.post('*', function( req, res) {
+ console.dir(req.body);
+});
+```
+
 
 ## Contact us
 
