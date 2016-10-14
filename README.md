@@ -18,7 +18,7 @@ This document outlines the setup and usage of ZenHub's API: a RESTful API with J
 
 ## Authentication
 
-### For ZenHub IO users
+### For ZenHub users
 All requests to the API need an API token. Generate a token in the [Settings](https://dashboard.zenhub.io/#/settings) section of your ZenHub Dashboard.
 Note: Each user may only have one token, so generating a new token will make any previous tokens invalid.
 
