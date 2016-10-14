@@ -1,5 +1,5 @@
 
-# Zenhub API
+# ZenHub API
 
 This document outlines the setup and usage of ZenHub's API: a RESTful API with JSON responses.
 
@@ -41,7 +41,7 @@ GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number
 Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
 To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
 
-Issue number is the same as displayed in your GitHub Issues page. For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
+Issue number is the same as displayed in your GitHub Issues page. For example, to fetch the [ZenHub API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
 
 The endpoint returns that issue's assigned _Time Estimate_ (if applicable), its _Pipeline_ in the Board, an _is epic_ flag (true/false), as well as any _+1s_.
 
@@ -75,7 +75,7 @@ GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/events
 Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
 To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
 
-Issue number is the same one displayed in your GitHub Issues page. For example, to fetch the [Zenhub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
+Issue number is the same one displayed in your GitHub Issues page. For example, to fetch the [ZenHub Public API](https://github.com/ZenHubIO/support/issues/172) issue information, the URL would be `https://api.zenhub.io/p1/repositories/13550592/issues/172`.
 
 The endpoint returns that issue's events, sorted by most recent. Each event contains the _User ID_ of the person who performed the change, the _Creation Date_ of the event, and _Type_. Type can be either `estimateIssue` or `transferIssue`. Old and new values are included for both event types.
 
