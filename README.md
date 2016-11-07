@@ -145,7 +145,7 @@ The endpoint returns the Board's pipelines, plus the issues contained within eac
 
 Even if the issues are returned in the right order, the _position_ can't be guessed from its index. Notice some issues won't have _position_ – this is because they have not been prioritized on your Board.
 
-Note: Closed issues might take up to one minute to show up in the Closed pipeline. Similarly, reopened issues might take up to one  minute to show in the right pipeline.
+Note: The Board returned by the endpoint doesn't include closed issues. To get closed issues for a repository, you can use the [GitHub API](https://developer.github.com/v3/issues/#list-issues). Reopened issues might take up to one minute to appear in the correct pipeline. 
 
 This is an example of returned JSON data:
 ```json
