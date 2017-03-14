@@ -11,6 +11,11 @@ This document outlines the setup and usage of ZenHub's API: a RESTful API with J
    repository](#get-the-zenhub-board-data-for-a-repository)
   - [Get Epics for a repository](#get-epics-for-a-repository)
   - [Get Epic data](#get-epic-data)
+  - [Move issue between pipelines](#move-issue-between-pipelines)
+  - [Set estimate for issue](#set-estimate-for-issue)
+  - [Convert Issue to Epic](#convert-issue-to-epic)
+  - [Convert Epic to Issue](#convert-epic-to-issue)
+  - [Add or remove issues to Epic](#add-or-remove-issues-to-epic)
 - [API limits](#api-limits)
 - [Errors](#errors)
 - [Webhooks](#webhooks)
@@ -29,9 +34,9 @@ Please follow the instruction in https://{{zenhub_enterprise_host}}/setup/howto/
 
 ## Endpoints
 
-### Get issue data
-
 Here are the current endpoints available for ZenHub's API.
+
+### Get issue data
 
 
 ```
@@ -145,7 +150,7 @@ The endpoint returns the Board's pipelines, plus the issues contained within eac
 
 Even if the issues are returned in the right order, the _position_ can't be guessed from its index. Notice some issues won't have _position_ – this is because they have not been prioritized on your Board.
 
-Note: The Board returned by the endpoint doesn't include closed issues. To get closed issues for a repository, you can use the [GitHub API](https://developer.github.com/v3/issues/#list-issues). Reopened issues might take up to one minute to appear in the correct pipeline. 
+Note: The Board returned by the endpoint doesn't include closed issues. To get closed issues for a repository, you can use the [GitHub API](https://developer.github.com/v3/issues/#list-issues). Reopened issues might take up to one minute to appear in the correct pipeline.
 
 This is an example of returned JSON data:
 ```json
@@ -312,7 +317,196 @@ NOTE: If an issue is from a different repository than the epic it belongs to, th
 }
 ```
 
+### Move issue between pipelines
 
+Moves an issue between the pipelines in your repository.
+
+```
+POST https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/moves
+```
+
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
+
+`issue_number` is the desired issue or epic that will be moved between pipelines.
+
+#### Request Body
+```
+{
+    "pipeline_id": "58bf13aba426771426665e60,
+    "position": "top"
+}
+```
+
+`pipeline_id` is the id for one of the pipelines in your repository (i.e: `In Progress`, `Done`, `QA`). In order to obtain this id, you can use the [Get the ZenHub Board data for a repository](#get-the-zenhub-board-data-for-a-repository) endpoint.
+
+`position` can be either a String with the values `top` or `bottom`, which will move the issue to the top or the bottom of the specified pipeline. They can also be specified as numbers (i.e `"position": 3`), which will define the desired slot that the issue should take in the pipeline. This number is based off a zero index, which means 0 is equal to the `top` of the pipeline.
+
+#### Response
+- `200` if the move was successful.
+
+`Does not return any body in the response.`
+
+### Set estimate for issue
+
+Sets an estimate value for an issue.
+
+```
+PUT https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/estimate
+```
+
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
+
+`issue_number` is the issue that we want to set the estimate for.
+
+#### Request Body
+
+```
+{
+  "estimate": 15
+}
+```
+
+`estimate` is a number that represents the value that we want to set as estimate.
+
+#### Response
+- `200` if the estimate was set successfully.
+```
+{
+  "estimate": 15
+}
+```
+
+`estimate` is the estimate number that was set for the specified issue.
+
+### Convert Issue to Epic
+
+Converts an issue to an epic, along with any issues that should be part of it.
+
+```
+POST https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/convert_to_epic
+```
+
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
+
+`issue_number` refers to the issue that we want to convert to an epic.
+
+#### Request body
+
+```
+{
+    "issues": [
+     {
+      "repo_id": 13550592,
+      "issue_number": 3
+     },
+     {
+      "repo_id": 13550592,
+      "issue_number": 1
+     }
+    ]
+}
+```
+
+`issues` are the issues that we want to be added to the epic. They should be specified as an array containing objects with the issue's `repo_id` and `issue_number`.
+
+#### Response
+
+- `200` if the issue was converted to epic successfully
+
+`Does not return any body in the response.`
+
+- `400` if the informed issue is already an epic
+
+### Convert Epic to Issue
+
+Converts an epic back to an issue.
+
+```
+POST https://api.zenhub.io/p1/repositories/:repo_id/epics/:issue_number/convert_to_issue
+```
+
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
+
+`issue_number` refers to the epic that we want to convert back to an issue.
+
+#### Response
+
+- `200` if the epic was converted to issue successfully
+
+`Does not return any body in the response.`
+
+### Add or remove issues to Epic
+
+Bulk add or remove issues to an epic. The result returns which issue was added or removed from the epic.
+
+```
+POST https://api.zenhub.io/p1/repositories/:repo_id/epics/:issue_number/update_issues
+```
+
+Please note: `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
+To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
+
+`issue_number` is the epic's issue number which we want to add or remove issues from.
+
+#### Request Body
+
+```
+{
+    "remove_issues": [
+     {
+      "repo_id":  13550592,
+      "issue_number": 3
+     }
+    ],
+    "add_issues": [
+     {
+      "repo_id":  13550592,
+      "issue_number": 2
+     },
+     {
+      "repo_id":  13550592,
+      "issue_number": 1
+     }
+    ]
+}
+```
+
+`remove_issues` is an array that indicates with issues we want to remove from the specified epic. They should be specified as an array containing objects with the issue's `repo_id` and `issue_number`.
+`add_issues` is an array that indicates with issues we want to add to the specified epic. They should be specified as an array containing objects with the issue's `repo_id` and `issue_number`.
+
+#### Response
+
+- `200` if the issue was updated.
+
+```
+{
+  "removed_issues": [
+    {
+      "repo_id": 3887883,
+      "issue_number": 3
+    }
+  ],
+  "added_issues": [
+    {
+      "repo_id": 3887883,
+      "issue_number": 2
+    },
+    {
+      "repo_id": 3887883,
+      "issue_number": 1
+    }
+  ]
+}
+```
+
+`removed_issues` shows which issues were removed in this operation.
+`add_issues` shows which issues were added in this operation.
+
+- `404` if the epic does not exist
 
 ## API limits
 
