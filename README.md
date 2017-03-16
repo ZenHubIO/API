@@ -362,7 +362,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 #### Request Body
 
-```
+```json
 {
   "estimate": 15
 }
