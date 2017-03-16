@@ -333,8 +333,8 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 #### Request Body
 ```json
 {
-    "pipeline_id": "58bf13aba426771426665e60,
-    "position": "top"
+  "pipeline_id":"58bf13aba426771426665e60",
+  "position":"top"
 }
 ```
 
@@ -364,7 +364,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 ```json
 {
-  "estimate": 15
+  "estimate":15
 }
 ```
 
@@ -374,7 +374,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 - `200` if the estimate was set successfully.
 ```json
 {
-  "estimate": 15
+  "estimate":15
 }
 ```
 
@@ -397,16 +397,16 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 ```json
 {
-    "issues": [
-     {
-      "repo_id": 13550592,
-      "issue_number": 3
-     },
-     {
-      "repo_id": 13550592,
-      "issue_number": 1
-     }
-    ]
+  "issues":[
+    {
+      "repo_id":13550592,
+      "issue_number":3
+    },
+    {
+      "repo_id":13550592,
+      "issue_number":1
+    }
+  ]
 }
 ```
 
@@ -456,22 +456,22 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 ```json
 {
-    "remove_issues": [
-     {
-      "repo_id":  13550592,
-      "issue_number": 3
-     }
-    ],
-    "add_issues": [
-     {
-      "repo_id":  13550592,
-      "issue_number": 2
-     },
-     {
-      "repo_id":  13550592,
-      "issue_number": 1
-     }
-    ]
+  "remove_issues":[
+    {
+      "repo_id":13550592,
+      "issue_number":3
+    }
+  ],
+  "add_issues":[
+    {
+      "repo_id":13550592,
+      "issue_number":2
+    },
+    {
+      "repo_id":13550592,
+      "issue_number":1
+    }
+  ]
 }
 ```
 
@@ -484,20 +484,20 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 ```json
 {
-  "removed_issues": [
+  "removed_issues":[
     {
-      "repo_id": 3887883,
-      "issue_number": 3
+      "repo_id":3887883,
+      "issue_number":3
     }
   ],
-  "added_issues": [
+  "added_issues":[
     {
-      "repo_id": 3887883,
-      "issue_number": 2
+      "repo_id":3887883,
+      "issue_number":2
     },
     {
-      "repo_id": 3887883,
-      "issue_number": 1
+      "repo_id":3887883,
+      "issue_number":1
     }
   ]
 }
