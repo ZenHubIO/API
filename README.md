@@ -331,7 +331,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 `issue_number` is the desired issue or epic that will be moved between pipelines.
 
 #### Request Body
-```
+```json
 {
     "pipeline_id": "58bf13aba426771426665e60,
     "position": "top"
@@ -372,7 +372,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 #### Response
 - `200` if the estimate was set successfully.
-```
+```json
 {
   "estimate": 15
 }
@@ -395,7 +395,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 #### Request body
 
-```
+```json
 {
     "issues": [
      {
@@ -454,7 +454,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 #### Request Body
 
-```
+```json
 {
     "remove_issues": [
      {
@@ -482,7 +482,7 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 - `200` if the issue was updated.
 
-```
+```json
 {
   "removed_issues": [
     {
