@@ -1,31 +1,30 @@
 # Authentication
 
-## For ZenHub users
 All requests to the API need an API token. Generate a token in the [Settings](https://dashboard.zenhub.io/#/settings) section of your ZenHub Dashboard.
 
-Note: Each user may only have one token, so generating a new token will make any previous tokens invalid.
+**Note**: Each user may only have one token, so generating a new token will invalidate previously created tokens.
 
-The token is sent in the `X-Authentication-Token` header.
+The token is sent in the `X-Authentication-Token` header. For example, using `curl` it'd be:
 
-For example, using `curl` it'd be:
+```sh
+curl -H 'X-Authentication-Token: TOKEN' URL
+```
 
-`curl -H 'X-Authentication-Token: TOKEN' URL`.
+Alternatively, you can send the token in the URL using the `access_token` query string attribute. To do so, add `?access_token=TOKEN` to any URL.
 
-Alternatively, you can send the token in the URL using the `access_token` query string attribute. To do so, add ```?access_token=TOKEN``` to any url.
+## For ZenHub Enterprise
 
+Please follow the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`
 
-## For ZenHub Enterprise users
-Please follow the instruction in https://{{zenhub_enterprise_host}}/setup/howto/api
+# API Rate Limit
 
-# API limits
-
-We allow 100 requests per minute to our API. All requests responses include some headers related to this limitation.
+We allow a maximum of 100 requests per minute to our API. All requests responses include some headers related to this limitation.
 
 Header | Meaning
 ------ | -------
-X-RateLimit-Limit | Total number of requests allowed before the reset time
-X-RateLimit-Used | Number of requests sent in the current cycle. Will be set to 0 at the reset time.
-X-RateLimit-Reset | Time in UTC epoch seconds when the usage gets reset.
+`X-RateLimit-Limit` | Total number of requests allowed before the reset time
+`X-RateLimit-Used` | Number of requests sent in the current cycle. Will be set to 0 at the reset time.
+`X-RateLimit-Reset` | Time in UTC epoch seconds when the usage gets reset.
 
 To avoid time differences between your computer and our servers, we suggest to use the `Date` header in the response to know exactly when the limit is reset.
 
@@ -35,18 +34,15 @@ The ZenHub API can return the following errors:
 
 Status Code | Meaning
 ----------- | -------
-401 | The token is not valid. See [Authentication](#authentication).
-403 | Reached request limit to the API. See [API Limits](#api-limits).
-404 | Not found.
+`401` | The token is not valid. See [Authentication](#authentication).
+`403` | Reached request limit to the API. See [API Limits](#api-rate-limits).
+`404` | Not found.
 
 # Endpoints
 
+##### Notes
 
-## Notes
-- `repo_id` i
-s the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/support` repository is `13550592`.
-To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get).
-
+- `repo_id` Is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/API` repository is `47655910`. To find out the ID of your repository, use [GitHub's API](https://developer.github.com/v3/repos/#get), or copy it from the URL of the Board (for this repo, the Board URL is https://github.com/ZenHubIO/API#boards?repos=47655910).
 
 ## Issues
 
@@ -54,18 +50,19 @@ To find out the ID of your repository, use [GitHub's API](https://developer.gith
 
 Get the data for a specific issue.
 
-**Endpoint:**
+##### Endpoint
+
 `GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`issue_number`|Number|Required
 
+##### Example Response
 
-**Example Response:**
 ```json
 {
   "estimate": {
@@ -84,19 +81,19 @@ Get the data for a specific issue.
 }
 ```
 
+##### Notes
 
-**Notes:**
-
-- Closed issues might take up to one minute to show up in the Closed pipeline. Similarly, reopened issues might take up to one minute to show in the right pipeline.
+- Closed issues might take up to one minute to show up in the Closed Pipeline. Similarly, reopened issues might take up to one minute to show in the correct Pipeline.
 
 ### Get Issue Events
 
 Get the events for an issue.
 
-**Endpoint:**
+##### Endpoint
+
 `GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/events`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -104,7 +101,8 @@ Get the events for an issue.
 |`issue_number`|Number|Required
 
 
-**Example Response:**
+##### Example Response
+
 ```json
 [
   {
@@ -156,85 +154,83 @@ Get the events for an issue.
 ]
 ```
 
-**Notes:**
+##### Notes
 
-- Returns issue events, sorted by most recent.
-- Each event contains the _User ID_ of the person who performed the change, the _Creation Date_ of the event, and _Type_.
-- Type can be either `estimateIssue` or `transferIssue`. Old and new values are included for both event types.
-
+- Returns issue events, sorted by creation time, most recent first.
+- Each event contains the _User ID_ of the user who performed the change, the _Creation Date_ of the event, and the event _Type_.
+- Type can be either `estimateIssue` or `transferIssue`. The values before and after the event are included in the event data.
 
 ### Move Issue between pipelines
 
 Moves an issue between the pipelines in your repository.
 
+##### Endpoint
 
-
-**Endpoint:**
 `POST https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/moves`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`issue_number`|Number|Required
 
-
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`pipeline_id`|String|Required
 |`position`|String/Number| Required
 
-Notes:
+##### Notes
 
 - `pipeline_id` is the id for one of the pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this id, you can use the Get the ZenHub Board data for a repository endpoint.
-- `position` can be specified as `top` or `bottom`, or a 0 based position in the pipline such as `1`, which would be the second position in the pipeline.
+- `position` can be specified as `top` or `bottom`, or a `0`-based position in the Pipeline such as `1`, which would be the second position in the pipeline.
 
-
-
-**Example Request Body**
+##### Example Request Body
 ```json
 {
-  "pipeline_id":"58bf13aba426771426665e60",
-  "position":"top"
+  "pipeline_id": "58bf13aba426771426665e60",
+  "position": "top"
 }
 ```
 
-**Example Response:**
+##### Example Response
 
 Status `200` for a successful move. No response body.
 
-### Set Issue estimate
-**Endpoint:**
+### Set Issue Estimate
+
+##### Endpoint
+
 `PUT https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/estimate`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`issue_number`|Number|Required
 
-
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`estimate`|Number|Required, number representing estimate value
 
-**Example Request Body**
+##### Example Request
+
 ```json
 {
-  "estimate":15
+  "estimate": 15
 }
 ```
 
-**Example Response:**
+##### Example Response
+
 ```json
 {
-  "estimate":15
+  "estimate": 15
 }
 ```
 
@@ -244,17 +240,17 @@ Status `200` for a successful move. No response body.
 
 Get all Epics for a repository
 
-**Endpoint:**
+##### Endpoint
+
 `GET https://api.zenhub.io/p1/repositories/:repo_id/epics`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 
-
-**Example Response:**
+##### Example Response
 ```json
 {
   "epic_issues": [
@@ -272,32 +268,31 @@ Get all Epics for a repository
 }
 ```
 
-**Notes:**
+##### Notes
 
-- The endpoint returns an array of the repository's epics. For each epic, issue number, repository ID, and the GitHub issue URL is provided.
-- If an issue is only an issue belonging to an epic (and not a parent epic), it is not considered an epic and won't be included in the return array.
+- The endpoint returns an array of the repository’s epics. For each epic, issue number, repository ID, and the GitHub issue URL is provided.
+- If an issue is only an issue belonging to an epic (and not a parent epic), it is not considered an epic and won’t be included in the return array.
 
 ### Get Epic Data
 
-Get the data for an Epic
+Get the data for an Epic issue.
 
-Endpoint description
+##### Endpoint
 
-**Endpoint:**
 `GET https://api.zenhub.io/p1/repositories/:repo_id/epics/:epic_id`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`epic_id`|Number|Required, Github issue number
 
-Notes:
+##### Notes
 
-- `epic_id` Is the GitHub issue number. You may fetch the list of epics using Get Epics for a repository endpoint.
+- `epic_id` is the GitHub issue number. You may fetch the list of epics using Get Epics for a repository endpoint.
 
-**Example Response:**
+##### Example Response
 ```json
 {
   "total_epic_estimates": {
@@ -351,11 +346,11 @@ Notes:
 }
 ```
 
-**Notes:**
+##### Notes
 
-The endpoint returns :
+The endpoint returns:
 
-- the total estimate epic value (the sum of the epic's estimate, plus all estimates contained within it)
+- the total estimate epic value (the sum of the epic’s estimate, plus all estimates contained within it)
 - the estimate of the epic
 - pipeline name the epic is in
 - issues belonging to the epic.
@@ -366,17 +361,17 @@ For each issue belonging to the epic:
 - repo id
 - estimate value
 - epic flag (true/false)
-- if the issue is from the same repository as the epic, the ZenHub Board's pipeline name (from the repo the epic is in) is attached.
-
+- if the issue is from the same repository as the epic, the ZenHub Board’s pipeline name (from the repo the epic is in) is attached.
 
 ### Convert an Epic to an Issue
 
 Converts an epic back to an issue.
 
-**Endpoint:**
+##### Endpoint
+
 `POST https://api.zenhub.io/p1/repositories/:repo_id/epics/:issue_number/convert_to_issue`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -384,7 +379,7 @@ Converts an epic back to an issue.
 |`issue_number`|Number|Required, the issue to be converted
 
 
-**Example Response:**
+##### Example Response
 
 - 200 if the issue was converted to epic successfully
 
@@ -394,25 +389,25 @@ Does not return any body in the response.
 
 Converts an issue to an epic, along with any issues that should be part of it.
 
-**Endpoint:**
+##### Endpoint
+
 `POST https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/convert_to_epic`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`issue_number`|Number|Required
 
-
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`issues`|[{repo_id: Number, issue_number: Number}]|Required, an Array of Objects with `repo_id` and `issue_number`
 
+##### Example Request Body
 
-**Example Request Body**
 ```json
 {
   "issues":[
@@ -428,22 +423,22 @@ Converts an issue to an epic, along with any issues that should be part of it.
 }
 ```
 
-**Response**
+##### Response
 
 Does not return any body in the response.
 
 - `200` if the issue was converted to epic successfully
 - `400` if the supplied issue is already an epic
 
-
 ### Add or remove issues to Epic
 
 Bulk add or remove issues to an epic. The result returns which issue was added or removed from the epic.
 
-**Endpoint:**
+##### Endpoint
+
 `POST https://api.zenhub.io/p1/repositories/:repo_id/epics/:issue_number/update_issues`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -452,33 +447,36 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 |`remove_issues`|[{repo_id: Number, issue_number: Number}]|Required, an Array of Objects with `repo_id` and `issue_number`
 |`add_issues`|[{repo_id: Number, issue_number: Number}]|Required, an Array of Objects with `repo_id` and `issue_number`
 
-**Example Request Body**
+##### Example Request Body
+
 ```json
 {
-  "remove_issues":[
+  "remove_issues": [
     {
-      "repo_id":13550592,
-      "issue_number":3
+      "repo_id": 13550592,
+      "issue_number": 3
     }
   ],
-  "add_issues":[
+  "add_issues": [
     {
-      "repo_id":13550592,
-      "issue_number":2
+      "repo_id": 13550592,
+      "issue_number": 2
     },
     {
-      "repo_id":13550592,
-      "issue_number":1
+      "repo_id": 13550592,
+      "issue_number": 1
     }
   ]
 }
 ```
 
+##### Notes
 
 - `remove_issues` is an array that indicates with issues we want to remove from the specified epic. They should be specified as an array containing objects with the issue's repo_id and issue_number.
 - `add_issues` is an array that indicates with issues we want to add to the specified epic. They should be specified as an array containing objects with the issue's repo_id and issue_number.
 
-**Example Response:**
+##### Example Response
+
 ```json
 {
   "removed_issues":[
@@ -500,27 +498,27 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 }
 ```
 
+##### Notes
+
 - `removed_issues` shows which issues were removed in this operation.
 - `add_issues` shows which issues were added in this operation.
-
-**Notes:**
 - Returns a `404` if the epic does not exist
-
 
 ## Boards
 
 ### Get the ZenHub Board data for a repository
 
-**Endpoint:**
+##### Endpoint
+
 `GET https://api.zenhub.io/p1/repositories/:repo_id/board`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 
-**Example Response:**
+##### Example Response
 ```json
 {
   "pipelines": [
@@ -596,20 +594,20 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 ## Milestones
 
 ### Set milestone start date
-**Endpoint:**
+##### Endpoint
 `POST /p1/repositories/:repo_id/milestones/:milestone_number/start_date`
 
 **Request Headers:**
 `x-authentication-token: <your ZH public token>`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`milestone_id`|Number|Required
 
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -620,7 +618,7 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 { "start_date": "2010-11-13T01:38:56.842Z" }
 ```
 
-**Example Response:**
+##### Example Response
 ```json
 { "start_date": "2010-11-13T01:38:56.842Z" }
 ```
@@ -630,33 +628,33 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 * The controller for this endpoint will fetch the milestone from Github to validate that the Github milestone `due_on` date is greater than the Zenhub milestone `start_date`. Some issues have been observed with the Github interaction when trying to share controller code across both the public and private APIs. See Issue [9282](https://github.com/axiomzen/zenhub/issues/9289).
 
 ### Get milestone start date
-**Endpoint:**
+##### Endpoint
 `GET /p1/repositories/:repo_id/milestones/:milestone_number/start_date`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`milestone_id`|Number|Required
 
-**Example Response:**
+##### Example Response
 ```json
 { "start_date":"2010-11-13T01:38:56.842Z" }
 ```
 
 ## Release Reports
 ### Create a release report
-**Endpoint:**
+##### Endpoint
  `POST /p1/repositories/:repo_id/reports/release`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |repo_id|number|Required, use the repo id, not the repo name
 
-**Body Parameters:**
+##### Body Parameters
 |`title`|string|Required
 |`description`| String| Optional
 |`start_date`| ISO8601 date string|Optional
@@ -674,7 +672,7 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 }
 ```
 
-**Example Response:**
+##### Example Response
 
 ```json
 {
@@ -699,16 +697,16 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 * The user creating the release requires permission to the repositories in the request.
 
 ### Get a release report
-**Endpoint:**
+##### Endpoint
 `GET /p1/reports/release/:release_id`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`release_id`|String|Required
 
-**Example Response:**
+##### Example Response
 ```json
 {
     "release_id": "59d3cd520a430a6344fd3bdb",
@@ -726,16 +724,16 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 ```
 
 ### Get release reports for a repository
-**Endpoint:**
+##### Endpoint
  `GET /p1/repositories/:repo_id/reports/releases`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 
-**Example Response:**
+##### Example Response
 ```json
 [
     {
@@ -763,16 +761,16 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 
 
 ### Edit a release report
-**Endpoint:**
+##### Endpoint
  `PATCH /p1/reports/release/:release_id`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |release_id|String|Required
 
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -793,7 +791,7 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 }
 ```
 
-**Example Response:**
+##### Example Response
 ```json
 {
     "release_id": "59d3d6438b3f16667f9e7174",
@@ -812,16 +810,16 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 ```
 
 ### Add workspaces to a release report
-**Endpoint:**
+##### Endpoint
  `PATCH /p1/reports/release/:release_id/workspaces/add`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |release_id|String|Required
 
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -835,7 +833,7 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 ```
 
 
-**Example Response:**
+##### Example Response
 ```json
 {
     "release_id": "59d3cd520a430a6344fd3bdb",
@@ -855,16 +853,16 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 
 
 ### Remove workspaces from release report
-**Endpoint:**
+##### Endpoint
  `PATCH /p1/reports/release/:release_id/workspaces/remove`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |release_id|String|Required
 
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -878,7 +876,7 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 ```
 
 
-**Example Response:**
+##### Example Response
 ```json
 {
     "release_id": "59d3cd520a430a6344fd3bdb",
@@ -898,17 +896,19 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 
 
 ## Release Report Issues
+
 ### Get all issues for a release report
-**Endpoint:**
+
+##### Endpoint
  `GET /p1/reports/release/:release_id/issues`
 
-**URL Parameters:**
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |release_id|String|Required
 
-**Example Response:**
+##### Example Response
 ```json
 [
     {
@@ -923,16 +923,18 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 ```
 
 ### Add or remove issues to/from a release report
-**Endpoint:**
- `PATCH /p1/reports/release/:release_id/issues`
 
-**URL Parameters:**
+##### Endpoint
+
+`PATCH /p1/reports/release/:release_id/issues`
+
+##### URL Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
 |release_id|String|Required
 
-**Body Parameters:**
+##### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
@@ -941,30 +943,31 @@ Bulk add or remove issues to an epic. The result returns which issue was added o
 
 *Both the add_issues and remove_issues keys are required, but can be and empty array when not used.*
 
-**Example Body Request:**
+##### Example Body Request
+
 ```json
 {
   "add_issues": [
     {
-        "repo_id": 103707262,
-        "issue_number": 3
+      "repo_id": 103707262,
+      "issue_number": 3
     }
   ],
   "remove_issues": []
 }
 ```
 
+##### Example Response
 
-**Example Response:**
 ```json
 {
-    "added": [
-        {
-            "repo_id": 103707262,
-            "issue_number": 3
-        }
-    ],
-    "removed": []
+  "added": [
+    {
+      "repo_id": 103707262,
+      "issue_number": 3
+    }
+  ],
+  "removed": []
 }
 ```
 
