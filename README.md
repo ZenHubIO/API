@@ -21,7 +21,7 @@ This describes the current version of the public ZenHub API. If you have any que
   - [Convert an Epic to an Issue](#convert-an-epic-to-an-issue)
   - [Convert an Issue to Epic](#convert-issue-to-epic)
   - [Add or Remove Issues from an Epic](#add-or-remove-issues-to-epic)
-- [Boards](#boards)
+- [Board](#board)
   - [Get Board Data for a Repository](#get-the-zenhub-board-data-for-a-repository)
 - [Milestones](#milestones)
   - [Set the Milestone Start Date](#set-milestone-start-date)
@@ -516,7 +516,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 - `add_issues` shows which issues were added in this operation.
 - Returns a `404` if the Epic doesn’t exist
 
-## Boards
+## Board
 
 - [Get Board Data for a Repository](#get-the-zenhub-board-data-for-a-repository)
 
