@@ -88,6 +88,11 @@ Status Code | Description
 
 ## Issues
 
+- [Get Issue Data](#get-issue-data)
+- [Get Issue Events](#get-issue-events)
+- [Move an Issue Between Pipelines](#move-an-issue-between-pipelines)
+- [Set Issue Estimate](#set-issue-estimate)
+
 ### Get Issue Data
 
 Get the data for a specific issue.
@@ -274,6 +279,12 @@ Status `200` for a successful move. No response body.
 ```
 
 ## Epics
+
+- [Get Epics for a Repository](#get-epics-for-a-repository)
+- [Get Epic Data](#get-epic-data)
+- [Convert an Epic to an Issue](#convert-an-epic-to-an-issue)
+- [Convert an Issue to Epic](#convert-issue-to-epic)
+- [Add or Remove Issues from an Epic](#add-or-remove-issues-to-epic)
 
 ### Get Epics for a repository
 
@@ -507,6 +518,8 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 ## Boards
 
+- [Get Board Data for a Repository](#get-the-zenhub-board-data-for-a-repository)
+
 ### Get the ZenHub Board data for a repository
 
 #### Endpoint
@@ -584,6 +597,9 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 ## Milestones
 
+- [Set the Milestone Start Date](#set-milestone-start-date)
+- [Get the Milestone Start Date](#get-milestone-start-date)
+
 ### Set milestone start date
 
 #### Endpoint
@@ -635,6 +651,13 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ```
 
 ## Release Reports
+
+- [Create a Release Report](#create-a-release-report)
+- [Get a Release Report](#get-a-release-report)
+- [Get Release Reports for a Repository](#get-release-reports-for-a-repository)
+- [Edit a Release Report](#edit-a-release-report)
+- [Add Workspaces to a Release Report](#add-workspaces-to-a-release-report)
+- [Remove Workspaces from a Release Report](#remove-workspaces-from-release-report)
 
 ### Create a Release Report
 
@@ -903,6 +926,9 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ```
 
 ## Release Report Issues
+
+- [Get all the Issues in a Release Report](#get-all-the-issues-for-a-release-report)
+- [Add or Remove Issues from a Release Report](#add-or-remove-issues-to-or-from-a-release-report)
 
 ### Get all the Issues for a Release Report
 
