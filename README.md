@@ -9,7 +9,39 @@ This describes the current version of the public ZenHub API. If you have any que
 - [Errors](https://github.com/ZenHubIO/API/tree/master#errors)
 
 [Endpoint Reference](https://github.com/ZenHubIO/API/tree/master#endpoint-reference)
+
 - [Issues](https://github.com/ZenHubIO/API/tree/master#issues)
+  - [Get Issue Data](https://github.com/ZenHubIO/API/tree/master#get-issue-data)
+  - [Get Issue Events](https://github.com/ZenHubIO/API/tree/master#get-issue-events)
+  - [Move an Issue Between Pipelines](https://github.com/ZenHubIO/API/tree/master#move-an-issue-between-pipelines)
+  - [Set Issue Estimate](https://github.com/ZenHubIO/API/tree/master#set-issue-estimate)
+- [Epics](https://github.com/ZenHubIO/API/tree/master#epics)
+  - [Get Epics for a Repository](https://github.com/ZenHubIO/API/tree/master#get-epics-for-a-repository)
+  - [Get Epic Data](https://github.com/ZenHubIO/API/tree/master#get-epic-data)
+  - [Convert an Epic to an Issue](https://github.com/ZenHubIO/API/tree/master#convert-an-epic-to-an-issue)
+  - [Convert an Issue to Epic](https://github.com/ZenHubIO/API/tree/master#convert-issue-to-epic)
+  - [Add or Remove Issues from an Epic](https://github.com/ZenHubIO/API/tree/master#add-or-remove-issues-to-epic)
+- [Boards](https://github.com/ZenHubIO/API/tree/master#boards)
+  - [Get Board Data for a Repository](https://github.com/ZenHubIO/API/tree/master#get-the-zenhub-board-data-for-a-repository)
+- [Milestones](https://github.com/ZenHubIO/API/tree/master#milestones)
+  - [Set the Milestone Start Date](https://github.com/ZenHubIO/API/tree/master#set-milestone-start-date)
+  - [Get the Milestone Start Date](https://github.com/ZenHubIO/API/tree/master#get-milestone-start-date)
+- [Release Reports](https://github.com/ZenHubIO/API/tree/master#release-reports)
+  - [Create a Release Report](https://github.com/ZenHubIO/API/tree/master#create-a-release-report)
+  - [Get a Release Report](https://github.com/ZenHubIO/API/tree/master#get-a-release-report)
+  - [Get Release Reports for a Repository](https://github.com/ZenHubIO/API/tree/master#get-release-reports-for-a-repository)
+  - [Edit a Release Report](https://github.com/ZenHubIO/API/tree/master#edit-a-release-report)
+  - [Add Workspaces to a Release Report](https://github.com/ZenHubIO/API/tree/master#add-workspaces-to-a-release-report)
+  - [Remove Workspaces from a Release Report](https://github.com/ZenHubIO/API/tree/master#remove-workspaces-from-release-report)
+- [Release Report Issues](https://github.com/ZenHubIO/API/tree/master#release-report-issues)
+  - [Get all the Issues in a Release Report](https://github.com/ZenHubIO/API/tree/master#get-all-the-issues-for-a-release-report)
+  - [Add or Remove Issues from a Release Report](https://github.com/ZenHubIO/API/tree/master#add-or-remove-issues-to-or-from-a-release-report)
+
+[Webhooks](https://github.com/ZenHubIO/API/tree/master#webhooks)
+
+  -[Custom Webhooks](https://github.com/ZenHubIO/API/tree/master#custom-webhooks)
+
+[Contact Us](https://github.com/ZenHubIO/API/tree/master#contact-us)
 
 ## Authentication
 
