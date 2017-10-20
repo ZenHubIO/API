@@ -39,7 +39,7 @@ This describes the current version of the public ZenHub API. If you have any que
 
 [Webhooks](https://github.com/ZenHubIO/API/tree/master#webhooks)
 
-  -[Custom Webhooks](https://github.com/ZenHubIO/API/tree/master#custom-webhooks)
+- [Custom Webhooks](https://github.com/ZenHubIO/API/tree/master#custom-webhooks)
 
 [Contact Us](https://github.com/ZenHubIO/API/tree/master#contact-us)
 
