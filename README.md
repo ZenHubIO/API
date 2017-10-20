@@ -2,6 +2,15 @@
 
 This describes the current version of the public ZenHub API. If you have any questions or feedback, please contact [support](mailto:support@zenhub.com).
 
+[Overview](https://github.com/ZenHubIO/API/tree/master#overview)
+
+- [Authentication](https://github.com/ZenHubIO/API/tree/master#authentication)
+- [API Rate Limit](https://github.com/ZenHubIO/API/tree/master#api-rate-limit)
+- [Errors](https://github.com/ZenHubIO/API/tree/master#errors)
+
+[Endpoint Reference](https://github.com/ZenHubIO/API/tree/master#endpoint-reference)
+- [Issues](https://github.com/ZenHubIO/API/tree/master#issues)
+
 ## Authentication
 
 All requests to the API need an API token. Generate a token in the [Settings](https://dashboard.zenhub.io/#/settings) section of your ZenHub Dashboard. The token is sent in the `X-Authentication-Token` header. For example, using `curl` it’d be:
@@ -12,7 +21,7 @@ curl -H 'X-Authentication-Token: TOKEN' URL
 
 Alternatively, you can send the token in the URL using the `access_token` query string attribute. To do so, add `?access_token=TOKEN` to any URL.
 
-##### Note
+#### Notes
 
 - Each user may only have one token, so generating a new token will invalidate previously created tokens.
 - For ZenHub Enterprise users, please follow the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`
