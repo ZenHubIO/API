@@ -2,46 +2,46 @@
 
 This describes the current version of the public ZenHub API. If you have any questions or feedback, please contact [support](mailto:support@zenhub.com).
 
-[Overview](https://github.com/ZenHubIO/API/tree/master#overview)
+[Overview](#overview)
 
-- [Authentication](https://github.com/ZenHubIO/API/tree/master#authentication)
-- [API Rate Limit](https://github.com/ZenHubIO/API/tree/master#api-rate-limit)
-- [Errors](https://github.com/ZenHubIO/API/tree/master#errors)
+- [Authentication](#authentication)
+- [API Rate Limit](#api-rate-limit)
+- [Errors](#errors)
 
-[Endpoint Reference](https://github.com/ZenHubIO/API/tree/master#endpoint-reference)
+[Endpoint Reference](#endpoint-reference)
 
-- [Issues](https://github.com/ZenHubIO/API/tree/master#issues)
-  - [Get Issue Data](https://github.com/ZenHubIO/API/tree/master#get-issue-data)
-  - [Get Issue Events](https://github.com/ZenHubIO/API/tree/master#get-issue-events)
-  - [Move an Issue Between Pipelines](https://github.com/ZenHubIO/API/tree/master#move-an-issue-between-pipelines)
-  - [Set Issue Estimate](https://github.com/ZenHubIO/API/tree/master#set-issue-estimate)
-- [Epics](https://github.com/ZenHubIO/API/tree/master#epics)
-  - [Get Epics for a Repository](https://github.com/ZenHubIO/API/tree/master#get-epics-for-a-repository)
-  - [Get Epic Data](https://github.com/ZenHubIO/API/tree/master#get-epic-data)
-  - [Convert an Epic to an Issue](https://github.com/ZenHubIO/API/tree/master#convert-an-epic-to-an-issue)
-  - [Convert an Issue to Epic](https://github.com/ZenHubIO/API/tree/master#convert-issue-to-epic)
-  - [Add or Remove Issues from an Epic](https://github.com/ZenHubIO/API/tree/master#add-or-remove-issues-to-epic)
-- [Boards](https://github.com/ZenHubIO/API/tree/master#boards)
-  - [Get Board Data for a Repository](https://github.com/ZenHubIO/API/tree/master#get-the-zenhub-board-data-for-a-repository)
-- [Milestones](https://github.com/ZenHubIO/API/tree/master#milestones)
-  - [Set the Milestone Start Date](https://github.com/ZenHubIO/API/tree/master#set-milestone-start-date)
-  - [Get the Milestone Start Date](https://github.com/ZenHubIO/API/tree/master#get-milestone-start-date)
-- [Release Reports](https://github.com/ZenHubIO/API/tree/master#release-reports)
-  - [Create a Release Report](https://github.com/ZenHubIO/API/tree/master#create-a-release-report)
-  - [Get a Release Report](https://github.com/ZenHubIO/API/tree/master#get-a-release-report)
-  - [Get Release Reports for a Repository](https://github.com/ZenHubIO/API/tree/master#get-release-reports-for-a-repository)
-  - [Edit a Release Report](https://github.com/ZenHubIO/API/tree/master#edit-a-release-report)
-  - [Add Workspaces to a Release Report](https://github.com/ZenHubIO/API/tree/master#add-workspaces-to-a-release-report)
-  - [Remove Workspaces from a Release Report](https://github.com/ZenHubIO/API/tree/master#remove-workspaces-from-release-report)
-- [Release Report Issues](https://github.com/ZenHubIO/API/tree/master#release-report-issues)
-  - [Get all the Issues in a Release Report](https://github.com/ZenHubIO/API/tree/master#get-all-the-issues-for-a-release-report)
-  - [Add or Remove Issues from a Release Report](https://github.com/ZenHubIO/API/tree/master#add-or-remove-issues-to-or-from-a-release-report)
+- [Issues](#issues)
+  - [Get Issue Data](#get-issue-data)
+  - [Get Issue Events](#get-issue-events)
+  - [Move an Issue Between Pipelines](#move-an-issue-between-pipelines)
+  - [Set Issue Estimate](#set-issue-estimate)
+- [Epics](#epics)
+  - [Get Epics for a Repository](#get-epics-for-a-repository)
+  - [Get Epic Data](#get-epic-data)
+  - [Convert an Epic to an Issue](#convert-an-epic-to-an-issue)
+  - [Convert an Issue to Epic](#convert-issue-to-epic)
+  - [Add or Remove Issues from an Epic](#add-or-remove-issues-to-epic)
+- [Boards](#boards)
+  - [Get Board Data for a Repository](#get-the-zenhub-board-data-for-a-repository)
+- [Milestones](#milestones)
+  - [Set the Milestone Start Date](#set-milestone-start-date)
+  - [Get the Milestone Start Date](#get-milestone-start-date)
+- [Release Reports](#release-reports)
+  - [Create a Release Report](#create-a-release-report)
+  - [Get a Release Report](#get-a-release-report)
+  - [Get Release Reports for a Repository](#get-release-reports-for-a-repository)
+  - [Edit a Release Report](#edit-a-release-report)
+  - [Add Workspaces to a Release Report](#add-workspaces-to-a-release-report)
+  - [Remove Workspaces from a Release Report](#remove-workspaces-from-release-report)
+- [Release Report Issues](#release-report-issues)
+  - [Get all the Issues in a Release Report](#get-all-the-issues-for-a-release-report)
+  - [Add or Remove Issues from a Release Report](#add-or-remove-issues-to-or-from-a-release-report)
 
-[Webhooks](https://github.com/ZenHubIO/API/tree/master#webhooks)
+[Webhooks](#webhooks)
 
-- [Custom Webhooks](https://github.com/ZenHubIO/API/tree/master#custom-webhooks)
+- [Custom Webhooks](#custom-webhooks)
 
-[Contact Us](https://github.com/ZenHubIO/API/tree/master#contact-us)
+[Contact Us](#contact-us)
 
 ## Authentication
 
@@ -62,7 +62,7 @@ Alternatively, you can send the token in the URL using the `access_token` query 
 
 We allow a maximum of 100 requests per minute to our API. All requests responses include some headers related to this limitation.
 
-Header | Meaning
+Header | Description
 ------ | -------
 `X-RateLimit-Limit` | Total number of requests allowed before the reset time
 `X-RateLimit-Used` | Number of requests sent in the current cycle. Will be set to 0 at the reset time.
