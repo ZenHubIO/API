@@ -749,7 +749,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 }
 ```
 
-### Get Release Reports for a repository
+### Get Release Reports for a Repository
 
 #### Endpoint
 
