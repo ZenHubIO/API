@@ -440,7 +440,7 @@ Converts an issue to an Epic, along with any issues that should be part of it.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Example Request Body
 
