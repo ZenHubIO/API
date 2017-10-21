@@ -21,7 +21,7 @@ This describes the current version of the public ZenHub API. If you have any que
   - [Convert an Epic to an Issue](#convert-an-epic-to-an-issue)
   - [Convert an Issue to Epic](#convert-issue-to-epic)
   - [Add or Remove Issues from an Epic](#add-or-remove-issues-to-epic)
-- [Boards](#boards)
+- [Board](#board)
   - [Get Board Data for a Repository](#get-the-zenhub-board-data-for-a-repository)
 - [Milestones](#milestones)
   - [Set the Milestone Start Date](#set-milestone-start-date)
@@ -87,6 +87,11 @@ Status Code | Description
 - `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/API` repository is `47655910`. To find out the ID of your repository, use [GitHub’s API](https://developer.github.com/v3/repos/#get), or copy it from the URL of the Board (for this repo, the Board URL is https://github.com/ZenHubIO/API#boards?repos=47655910).
 
 ## Issues
+
+- [Get Issue Data](#get-issue-data)
+- [Get Issue Events](#get-issue-events)
+- [Move an Issue Between Pipelines](#move-an-issue-between-pipelines)
+- [Set Issue Estimate](#set-issue-estimate)
 
 ### Get Issue Data
 
@@ -275,6 +280,12 @@ Status `200` for a successful move. No response body.
 
 ## Epics
 
+- [Get Epics for a Repository](#get-epics-for-a-repository)
+- [Get Epic Data](#get-epic-data)
+- [Convert an Epic to an Issue](#convert-an-epic-to-an-issue)
+- [Convert an Issue to Epic](#convert-issue-to-epic)
+- [Add or Remove Issues from an Epic](#add-or-remove-issues-to-epic)
+
 ### Get Epics for a repository
 
 Get all Epics for a repository
@@ -431,7 +442,7 @@ Converts an issue to an Epic, along with any issues that should be part of it.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Example Request Body
 
@@ -512,7 +523,9 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 - `add_issues` shows which issues were added in this operation.
 - Returns a `404` if the Epic doesn’t exist
 
-## Boards
+## Board
+
+- [Get Board Data for a Repository](#get-the-zenhub-board-data-for-a-repository)
 
 ### Get the ZenHub Board data for a repository
 
@@ -591,6 +604,9 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 ## Milestones
 
+- [Set the Milestone Start Date](#set-milestone-start-date)
+- [Get the Milestone Start Date](#get-milestone-start-date)
+
 ### Set milestone start date
 
 #### Endpoint
@@ -642,6 +658,13 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ```
 
 ## Release Reports
+
+- [Create a Release Report](#create-a-release-report)
+- [Get a Release Report](#get-a-release-report)
+- [Get Release Reports for a Repository](#get-release-reports-for-a-repository)
+- [Edit a Release Report](#edit-a-release-report)
+- [Add Workspaces to a Release Report](#add-workspaces-to-a-release-report)
+- [Remove Workspaces from a Release Report](#remove-workspaces-from-release-report)
 
 ### Create a Release Report
 
@@ -733,7 +756,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 }
 ```
 
-### Get Release Reports for a repository
+### Get Release Reports for a Repository
 
 #### Endpoint
 
@@ -910,6 +933,9 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ```
 
 ## Release Report Issues
+
+- [Get all the Issues in a Release Report](#get-all-the-issues-for-a-release-report)
+- [Add or Remove Issues from a Release Report](#add-or-remove-issues-to-or-from-a-release-report)
 
 ### Get all the Issues for a Release Report
 
