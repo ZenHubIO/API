@@ -51,7 +51,7 @@ All requests to the API need an API token. Generate a token in the [Settings](ht
 curl -H 'X-Authentication-Token: TOKEN' URL
 ```
 
-Alternatively, you can send the token in the URL using the `access_token` query string attribute. To do so, add `?access_token=TOKEN` to any URL.
+Alternatively, you can choose to send the token in the URL using the `access_token` query string attribute. To do so, add `?access_token=TOKEN` to any URL.
 
 #### Notes
 
@@ -60,7 +60,7 @@ Alternatively, you can send the token in the URL using the `access_token` query 
 
 ## API Rate Limit
 
-We allow a maximum of 100 requests per minute to our API. All requests responses include some headers related to this limitation.
+We allow a maximum of 100 requests per minute to our API. All requests responses include the following headers related to this limitation.
 
 Header | Description
 ------ | -------
@@ -84,7 +84,7 @@ Status Code | Description
 
 #### Notes
 
-- `repo_id` Is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/API` repository is `47655910`. To find out the ID of your repository, use [GitHub’s API](https://developer.github.com/v3/repos/#get), or copy it from the URL of the Board (for this repo, the Board URL is https://github.com/ZenHubIO/API#boards?repos=47655910).
+- `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/API` repository is `47655910`. To find out the ID of your repository, use [GitHub’s API](https://developer.github.com/v3/repos/#get), or copy it from the URL of the Board (for this repo, the Board URL is https://github.com/ZenHubIO/API#boards?repos=47655910).
 
 ## Issues
 
@@ -204,7 +204,7 @@ Get the events for an issue.
 
 ### Move an Issue Between Pipelines
 
-Moves an issue between the pipelines in your repository.
+Moves an issue between the Pipelines in your repository.
 
 #### Endpoint
 
@@ -226,7 +226,7 @@ Moves an issue between the pipelines in your repository.
 
 #### Notes
 
-- `pipeline_id` is the id for one of the pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this id, you can use the Get the ZenHub Board data for a repository endpoint.
+- `pipeline_id` is the ID for one of the Pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this ID, you can use the `Get the ZenHub Board data for a repository` endpoint.
 - `position` can be specified as `top` or `bottom`, or a `0`-based position in the Pipeline such as `1`, which would be the second position in the Pipeline.
 
 #### Example Request Body
@@ -310,7 +310,8 @@ Get all Epics for a repository
 
 #### Notes
 
-- The endpoint returns an array of the repository’s epics. For each Epic, issue number, repository ID, and the GitHub issue URL is provided.
+- The endpoint returns an array of the repository’s Epics. The issue number, repository ID,
+and GitHub issue URL is provided for each Epic.
 - If an issue is only an issue belonging to an Epic (and not a parent Epic), it is not considered an Epic and won’t be included in the return array.
 
 ### Get Epic Data
@@ -330,7 +331,7 @@ Get the data for an Epic issue.
 
 #### Notes
 
-- `epic_id` is the GitHub issue number. You may fetch the list of epics using Get Epics for a repository endpoint.
+- `epic_id` is the GitHub issue number. You may fetch the list of Epics using `Get Epics for a repository` endpoint.
 
 #### Example Response
 ```json
@@ -376,17 +377,18 @@ Get the data for an Epic issue.
 
 The endpoint returns:
 
-- the total estimate Epic value (the sum of the Epic’s Estimate, plus all Estimates contained within it)
+- the total Epic Estimate value (the sum of all the Estimates of Issues contained within
+  the Epic, as well as the Estimate of the Epic itself)
 - the Estimate of the Epic
-- the Pipeline name the Epic is in
+- the name of the Pipeline the Epic is in
 - issues belonging to the Epic
 
 For each issue belonging to the Epic:
 
 - issue number
-- repo id
+- repo ID
 - Estimate value
-- Is epic flag (`true` or `false`)
+- `is_epic` flag (`true` or `false`)
 - if the issue is from the same repository as the Epic, the ZenHub Board’s Pipeline name (from the repo the Epic is in) is attached.
 
 ### Convert an Epic to an Issue
@@ -406,7 +408,7 @@ Converts an Epic back to a regular issue.
 
 #### Example Response
 
-- `200` if the issue was converted to epic successfully
+- `200` if the issue was converted to Epic successfully
 
 Does not return any body in the response.
 
@@ -463,6 +465,11 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ------------ | ------ | -------
 |`repo_id`|Number|Required
 |`issue_number`|Number|Required
+
+#### Body Parameters
+
+|Name|Type|Comments
+------------ | ------ | -------
 |`remove_issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
 |`add_issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
 
@@ -578,7 +585,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 #### Notes
 
-- The endpoint returns the Board’s pipelines, plus the issues contained within each Pipeline. It returns the issue number of each issue, their position in the Board, the is Epic flag (`true` or `false`), and its Estimate (if set).
+- The endpoint returns the Board’s pipelines, plus the issues contained within each Pipeline. It returns the issue number of each issue, their position in the Board, the `is_epic` flag (`true` or `false`), and its Estimate (if set).
 - Even if the issues are returned in the right order, the position can’t be guessed from its index. Note that some issues won’t have position – this is because they have not been prioritized on your Board.
 - The Board returned by the endpoint doesn’t include closed issues. To get closed issues for a repository, you can use the GitHub API. Reopened issues might take up to one minute to appear in the correct Pipeline.
 
@@ -595,7 +602,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
-|`milestone_id`|Number|Required
+|`milestone_number`|Number|Required
 
 #### Body Parameters
 
@@ -626,7 +633,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|Number|Required
-|`milestone_id`|Number|Required
+|`milestone_number`|Number|Required
 
 #### Example Response
 
@@ -692,7 +699,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 #### Notes
 
 - The endpoint takes a `repo_id` param in the URL. This is the minimum requirement for associating a release with a Board
-- Additional repository ids can be passed in the body  `repositories` parameter
+- Additional repository IDs can be passed in the body  `repositories` parameter
 - Any Boards not associated with the URL `repo_id` parameter, but associated with repositories in the request body `repositories` parameter will also be associated to the Release Report.
 - The user creating the release requires push permission to the repositories in the request.
 
@@ -785,7 +792,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 |`description`|String|Optional
 |`start_date`|ISO8601 date string|Optional
 |`desired_end_date`| ISO8601 date string| Optional
-|`state`| String|Optional, 'open' or 'closed'
+|`state`| String|Optional, `open` or `closed`
 
 #### Example Request Body
 
@@ -834,7 +841,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repositories`|[Number]|Required, an array of repo ids
+|`repositories`|[Number]|Required, an array of repo IDs
 
 #### Example Request Body
 
@@ -877,7 +884,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repositories`|[Number]|Required, array of repository IDs
+|`repositories`|[Number]|Required, array of repo IDs
 
 #### Example Request Body
 
@@ -941,12 +948,12 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`add_issues`|[Number]|Required, an array of repo ids
-|`remove_issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`add_issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`remove_issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Note
 
-- Both the `add_issues` and `remove_issues` keys are required, but can be and empty array when not used
+- Both the `add_issues` and `remove_issues` keys are required, but can be an empty array when not used
 
 #### Example Body Request
 
