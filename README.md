@@ -110,8 +110,8 @@ Get the data for a specific issue.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number`|Required
 
 #### Example Response
 
@@ -149,8 +149,8 @@ Get the events for an issue.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number`|Required
 
 
 #### Example Response
@@ -224,19 +224,19 @@ Moves an issue between the Pipelines in your repository.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`pipeline_id`|String|Required
-|`position`|String/Number| Required
+|`pipeline_id`|`String`|Required
+|`position`|`String` or `Number`| Required
 
 #### Notes
 
-- `pipeline_id` is the ID for one of the Pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this ID, you can use the `Get the ZenHub Board data for a repository` endpoint.
+- `pipeline_id` is the ID for one of the Pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this ID, you can use the [_Get Board Data for a Repository_](#get-the-zenhub-board-data-for-a-repository)` endpoint.
 - `position` can be specified as `top` or `bottom`, or a `0`-based position in the Pipeline such as `1`, which would be the second position in the Pipeline.
 
 #### Example Request Body
@@ -262,14 +262,14 @@ Status `200` for a successful move. No response body.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`estimate`|Number|Required, number representing estimate value
+|`estimate`|`Number`|Required, number representing estimate value
 
 #### Example Request
 
@@ -303,7 +303,7 @@ Get all Epics for a repository
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
+|`repo_id`|`Number`|Required
 
 #### Example Response
 
@@ -342,8 +342,8 @@ Get the data for an Epic issue.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`epic_id`|Number|Required, Github issue number
+|`repo_id`|`Number`|Required
+|`epic_id`|`Number`|Required, Github issue number
 
 #### Notes
 
@@ -419,8 +419,8 @@ Converts an Epic back to a regular issue.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required, the number of the issue to be converted
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number`|Required, the number of the issue to be converted
 
 #### Example Response
 
@@ -440,14 +440,14 @@ Converts an issue to an Epic, along with any issues that should be part of it.
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`issues`|`[{repo_id: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Example Request Body
 
@@ -479,15 +479,15 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`issue_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`issue_number`|`Number|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`remove_issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
-|`add_issues`|[{repo_id: Number, issue_number: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`remove_issues`|[`{repo_id: Number, issue_number: Number}`]|Required, array of Objects with `repo_id` and `issue_number`
+|`add_issues`|[`{repo_id: Number, issue_number: Number}`]|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Example Request Body
 
@@ -542,7 +542,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
+|`repo_id`|`Number`|Required
 
 #### Example Response
 
@@ -622,8 +622,8 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`milestone_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`milestone_number`|`Number`|Required
 
 #### Body Parameters
 
@@ -653,8 +653,8 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
-|`milestone_number`|Number|Required
+|`repo_id`|`Number`|Required
+|`milestone_number`|`Number`|Required
 
 #### Example Response
 
@@ -681,17 +681,17 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
+|`repo_id`|`Number`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`title`|String|Required
-|`description`| String| Optional
+|`title`|`String`|Required
+|`description`| `String`| Optional
 |`start_date`| ISO8601 date string|Optional
 |`desired_end_date`| ISO8601 date string| Optional
-|`repositories`| [Number]| Optional
+|`repositories`| `[Number]`| Optional
 
 #### Example Request Body
 ```json
@@ -741,7 +741,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`release_id`|String|Required
+|`release_id`|`String`|Required
 
 #### Example Response
 
@@ -771,7 +771,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repo_id`|Number|Required
+|`repo_id`|`Number`|Required
 
 #### Example Response
 
@@ -810,17 +810,17 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`release_id`|String|Required
+|`release_id`|`String`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`title`|String|Required
-|`description`|String|Optional
+|`title`|`String`|Required
+|`description`|`String`|Optional
 |`start_date`|ISO8601 date string|Optional
 |`desired_end_date`| ISO8601 date string| Optional
-|`state`| String|Optional, `open` or `closed`
+|`state`| `String`|Optional, `open` or `closed`
 
 #### Example Request Body
 
@@ -863,13 +863,13 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`release_id`|String|Required
+|`release_id`|`String`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repositories`|[Number]|Required, an array of repo IDs
+|`repositories`|`[Number]`|Required, an array of repo IDs
 
 #### Example Request Body
 
@@ -906,13 +906,13 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`release_id`|String|Required
+|`release_id`|`String`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`repositories`|[Number]|Required, array of repo IDs
+|`repositories`|`[Number]`|Required, array of repo IDs
 
 #### Example Request Body
 
@@ -952,7 +952,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`release_id`|String|Required
+|`release_id`|`String`|Required
 
 #### Example Response
 
@@ -973,14 +973,14 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`release_id`|String|Required
+|`release_id`|`String`|Required
 
 #### Body Parameters
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`add_issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
-|`remove_issues`|[{`repo_id`: Number, `issue_number`: Number}]|Required, array of Objects with `repo_id` and `issue_number`
+|`add_issues`|`[{repo_id`: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
+|`remove_issues`|`[{repo_id`: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Note
 
