@@ -979,8 +979,8 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 |Name|Type|Comments
 ------------ | ------ | -------
-|`add_issues`|`[{repo_id`: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
-|`remove_issues`|`[{repo_id`: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
+|`add_issues`|`[{repo_id: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
+|`remove_issues`|`[{repo_id: Number, issue_number: Number}]`|Required, array of Objects with `repo_id` and `issue_number`
 
 #### Note
 
