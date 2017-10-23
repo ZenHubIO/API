@@ -4,6 +4,7 @@ This describes the current version of the public ZenHub API. If you have any que
 
 [Overview](#overview)
 
+- [Root Endpoint](#root-endpoint)
 - [Authentication](#authentication)
 - [API Rate Limit](#api-rate-limit)
 - [Errors](#errors)
@@ -42,6 +43,10 @@ This describes the current version of the public ZenHub API. If you have any que
 - [Custom Webhooks](#custom-webhooks)
 
 [Contact Us](#contact-us)
+
+## Root Endpoint
+
+The root endpoint for the public API is `https://api.zenhub.io/`. For ZenHub Enterprise, refer to the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`.
 
 ## Authentication
 
@@ -99,7 +104,7 @@ Get the data for a specific issue.
 
 #### Endpoint
 
-`GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number`
+`GET /p1/repositories/:repo_id/issues/:issue_number`
 
 #### URL Parameters
 
@@ -138,7 +143,7 @@ Get the events for an issue.
 
 #### Endpoint
 
-`GET https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/events`
+`GET /p1/repositories/:repo_id/issues/:issue_number/events`
 
 #### URL Parameters
 
@@ -213,7 +218,7 @@ Moves an issue between the Pipelines in your repository.
 
 #### Endpoint
 
-`POST https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/moves`
+`POST /p1/repositories/:repo_id/issues/:issue_number/moves`
 
 #### URL Parameters
 
@@ -251,7 +256,7 @@ Status `200` for a successful move. No response body.
 
 #### Endpoint
 
-`PUT https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/estimate`
+`PUT /p1/repositories/:repo_id/issues/:issue_number/estimate`
 
 #### URL Parameters
 
@@ -292,7 +297,7 @@ Get all Epics for a repository
 
 #### Endpoint
 
-`GET https://api.zenhub.io/p1/repositories/:repo_id/epics`
+`GET /p1/repositories/:repo_id/epics`
 
 #### URL Parameters
 
@@ -331,7 +336,7 @@ Get the data for an Epic issue.
 
 #### Endpoint
 
-`GET https://api.zenhub.io/p1/repositories/:repo_id/epics/:epic_id`
+`GET /p1/repositories/:repo_id/epics/:epic_id`
 
 #### URL Parameters
 
@@ -408,7 +413,7 @@ Converts an Epic back to a regular issue.
 
 #### Endpoint
 
-`POST https://api.zenhub.io/p1/repositories/:repo_id/epics/:issue_number/convert_to_issue`
+`POST /p1/repositories/:repo_id/epics/:issue_number/convert_to_issue`
 
 #### URL Parameters
 
@@ -429,7 +434,7 @@ Converts an issue to an Epic, along with any issues that should be part of it.
 
 #### Endpoint
 
-`POST https://api.zenhub.io/p1/repositories/:repo_id/issues/:issue_number/convert_to_epic`
+`POST /p1/repositories/:repo_id/issues/:issue_number/convert_to_epic`
 
 #### URL Parameters
 
@@ -468,7 +473,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 #### Endpoint
 
-`POST https://api.zenhub.io/p1/repositories/:repo_id/epics/:issue_number/update_issues`
+`POST /p1/repositories/:repo_id/epics/:issue_number/update_issues`
 
 #### URL Parameters
 
