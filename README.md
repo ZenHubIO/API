@@ -480,7 +480,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 |Name|Type|Comments
 ------------ | ------ | -------
 |`repo_id`|`Number`|Required
-|`issue_number`|`Number|Required
+|`issue_number`|`Number`|Required
 
 #### Body Parameters
 
