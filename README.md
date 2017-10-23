@@ -536,7 +536,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 #### Endpoint
 
-`GET https://api.zenhub.io/p1/repositories/:repo_id/board`
+`GET /p1/repositories/:repo_id/board`
 
 #### URL Parameters
 
