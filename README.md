@@ -578,7 +578,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
       ]
     },
     {
-      "id": "595d430add03f01d32460082"
+      "id": "595d430add03f01d32460082",
       "name": "To Do",
       "issues": [
         {
