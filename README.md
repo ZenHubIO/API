@@ -50,7 +50,7 @@ The root endpoint for the public API is `https://api.zenhub.io/`. For ZenHub Ent
 
 ## Authentication
 
-All requests to the API need an API token. Generate a token in the [Settings](https://dashboard.zenhub.io/#/settings) section of your ZenHub Dashboard. The token is sent in the `X-Authentication-Token` header. For example, using `curl` it’d be:
+All requests to the API need an API token. Generate a token in the **API Tokens section** of your ZenHub [Dashboard](https://app.zenhub.com/app/dashboard). The token is sent in the `X-Authentication-Token` header. For example, using `curl` it’d be:
 
 ```sh
 curl -H 'X-Authentication-Token: TOKEN' URL
@@ -1019,7 +1019,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 You can use our webhooks to fetch or store your ZenHub data, in real time, across services like Slack, Gitter, Spark, HipChat, or something custom!
 
-To set up an integration, head on over to our [Dashboard](https://dashboard.zenhub.com/), navigate to your organization, and select the **Integrations** tab. From there, you may choose one of the 5 services (Slack, HipChat, Gitter, Spark, or Custom).
+To set up an integration, head on over to our [Dashboard](https://app.zenhub.com/app/dashboard), navigate to your organization, and select the **Slack & Integrations** tab. From there, you may choose one of the 5 services (Slack, HipChat, Gitter, Spark, or Custom).
 
 For instructions, you'll notice the `How to create a webhook` link changes dynamically based on the service you select. Simply choose a repository with which to connect, add an optional description, paste your webhook, and click "Add" to save your new integration.
 
