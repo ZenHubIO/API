@@ -46,7 +46,7 @@ This describes the current version of the public ZenHub API. If you have any que
 
 ## Root Endpoint
 
-The root endpoint for the public API is `https://api.zenhub.io/`. For ZenHub Enterprise, refer to the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`.
+The root endpoint for the public API is `https://api.zenhub.com/`. For ZenHub Enterprise, refer to the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`.
 
 ## Authentication
 
