@@ -2,14 +2,14 @@
 
 This describes the current version of the public ZenHub API. If you have any questions or feedback, please contact [support](mailto:support@zenhub.com).
 
-[Overview](#overview)
+### [Overview](#overview)
 
 - [Root Endpoint](#root-endpoint)
 - [Authentication](#authentication)
 - [API Rate Limit](#api-rate-limit)
 - [Errors](#errors)
 
-[Endpoint Reference](#endpoint-reference)
+### [Endpoint Reference](#endpoint-reference)
 
 - [Issues](#issues)
   - [Get Issue Data](#get-issue-data)
@@ -38,11 +38,11 @@ This describes the current version of the public ZenHub API. If you have any que
   - [Get all the Issues in a Release Report](#get-all-the-issues-for-a-release-report)
   - [Add or Remove Issues from a Release Report](#add-or-remove-issues-to-or-from-a-release-report)
 
-[Webhooks](#webhooks)
+### [Webhooks](#webhooks)
 
 - [Custom Webhooks](#custom-webhooks)
 
-[Contact Us](#contact-us)
+### [Contact Us](#contact-us)
 
 ## Root Endpoint
 
