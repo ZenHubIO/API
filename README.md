@@ -1094,22 +1094,22 @@ Our custom webhook sends a POST request to your webhook for multiple events that
 As an example, here's a simple Node/Express app that would be able receive the webhooks (using ngrok):
 
 ```javascript
-var express    = require('express');
-var http       = require('http');
+var express = require('express');
+var http = require('http');
 var bodyParser = require('body-parser');
-var app        = express();
+var app = express();
 
 http.createServer(app).listen('6000', function() {
- console.log('Listening on 6000');
+  console.log('Listening on 6000');
 });
 
 app.use(bodyParser());
 
 app.post('*', function(req, res) {
- console.dir(req.body);
+  console.dir(req.body);
 });
 ```
 
 # Contact us
 
-We’d love to hear from you. If you have any questions, concerns, or ideas related to the ZenHub API, open an issue in our [Support](https://github.com/ZenHubIO/support/issues#boards) repo or find us on [Twitter](http://www.twitter.com/zenhubio).
+We’d love to hear from you. If you have any questions, concerns, or ideas related to the ZenHub API, open an issue in our [Support repo](https://github.com/ZenHubIO/support/issues#boards) or find us on [Twitter](http://www.twitter.com/ZenHubHQ).
