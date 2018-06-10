@@ -236,7 +236,7 @@ Moves an issue between the Pipelines in your repository.
 
 #### Notes
 
-- `pipeline_id` is the ID for one of the Pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this ID, you can use the [_Get Board Data for a Repository_](#get-the-zenhub-board-data-for-a-repository)` endpoint.
+- `pipeline_id` is the ID for one of the Pipelines in your repository (i.e: In Progress, Done, QA). In order to obtain this ID, you can use the [_Get Board Data for a Repository_](#get-the-zenhub-board-data-for-a-repository) endpoint.
 - `position` can be specified as `top` or `bottom`, or a `0`-based position in the Pipeline such as `1`, which would be the second position in the Pipeline.
 
 #### Example Request Body
