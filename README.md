@@ -27,6 +27,8 @@ This describes the current version of the public ZenHub API. If you have any que
 - [Milestones](#milestones)
   - [Set the Milestone Start Date](#set-milestone-start-date)
   - [Get the Milestone Start Date](#get-milestone-start-date)
+- [Dependencies](#dependencies)
+  - [Get Dependencies for a Repository](#get-dependencies-for-a-repository)
 - [Release Reports](#release-reports)
   - [Create a Release Report](#create-a-release-report)
   - [Get a Release Report](#get-a-release-report)
@@ -664,6 +666,58 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ```json
 { "start_date": "2010-11-13T01:38:56.842Z" }
 ```
+
+## Dependencies
+
+- [Get Dependencies for a Repository](#get-dependencies-for-a-repository)
+
+### Get Dependencies for a Repository
+
+#### Endpoint
+
+`GET /p1/repositories/:repo_id/dependencies`
+
+#### URL Parameters
+
+|Name|Type|Comments
+------------ | ------ | -------
+|`repo_id`|`Number`|Required
+
+#### Example Response
+
+```json
+{
+  "dependencies": [
+    {
+      "blocking": {
+        "issue_number": 3953,
+        "repo_id": 1234567
+      },
+      "blocked": {
+        "issue_number": 1342,
+        "repo_id": 1234567
+      }
+    },
+    {
+      "blocking": {
+        "issue_number": 5,
+        "repo_id":  987
+      },
+      "blocked": {
+        "issue_number": 1342,
+        "repo_id": 1234567
+      }
+    },
+  ]
+}
+```
+
+#### Notes
+
+- This endpoint fetches all dependencies associated to the given repository that the user has read permission to
+- The endpoint takes a `repo_id` param in the URL.
+- Only dependencies where the user has read permissions to both sides will be returned
+
 
 ## Release Reports
 
