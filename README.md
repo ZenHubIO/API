@@ -29,6 +29,7 @@ This describes the current version of the public ZenHub API. If you have any que
   - [Get the Milestone Start Date](#get-milestone-start-date)
 - [Dependencies](#dependencies)
   - [Get Dependencies for a Repository](#get-dependencies-for-a-repository)
+  - [Create a Dependency](#create-a-dependency)
 - [Release Reports](#release-reports)
   - [Create a Release Report](#create-a-release-report)
   - [Get a Release Report](#get-a-release-report)
@@ -670,6 +671,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ## Dependencies
 
 - [Get Dependencies for a Repository](#get-dependencies-for-a-repository)
+- [Create a Dependency](#create-a-dependency)
 
 ### Get Dependencies for a Repository
 
@@ -718,6 +720,58 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 - The endpoint takes a `repo_id` param in the URL.
 - Only dependencies where the user has read permissions to both sides will be returned
 
+## Create a Dependency
+
+#### Endpoint
+
+`POST /p1/dependencies`
+
+#### Body Parameters
+
+|Name|Type|Comments
+------------ | ------ | -------
+|`blocking`|`Object`| Required
+|`blocking.repo_id`| `Number`| Required
+|`blocking.issue_number`| `Number`| Required
+|`blocked`|`Object`| Required
+|`blocked.repo_id`| `Number`| Required
+|`blocked.issue_number`| `Number`| Required
+
+#### Example Request Body
+```json
+{
+  "blocking": {
+    "repo_id": 92563409,
+    "issue_number": 14
+  },
+  "blocked": {
+    "repo_id": 92563409,
+    "issue_number": 13
+  }
+}
+```
+
+#### Example Response Body
+```json
+{
+  "blocking": {
+    "repo_id": 92563409,
+    "issue_number": 14
+  },
+  "blocked": {
+    "repo_id": 92563409,
+    "issue_number": 13
+  }
+}
+```
+
+#### Notes
+
+- This endpoint creates one dependency
+- The endpoint takes a `dependency` in the Body (see description above).
+- User needs write permission on both repositories
+- Cannot create dependency that will cause cycle, or between repositories not in the same workspace
+- On success: returns HTTP 200 and returns the created object
 
 ## Release Reports
 
