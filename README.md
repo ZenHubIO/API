@@ -126,7 +126,6 @@ Get the data for a specific issue.
   },
   "plus_ones": [
     {
-      "user_id": 16717,
       "created_at": "2015-12-11T18:43:22.296Z"
     }
   ],
@@ -139,6 +138,7 @@ Get the data for a specific issue.
 
 #### Notes
 
+- `plus_ones[].user_id` was removed from the response.
 - Closed issues might take up to one minute to show up in the Closed Pipeline. Similarly, reopened issues might take up to one minute to show in the correct Pipeline.
 
 ### Get Issue Events
