@@ -50,7 +50,7 @@ This describes the current version of the public ZenHub API. If you have any que
 
 ## Root Endpoint
 
-On Cloud, the root endpoint for the public API is `https://api.zenhub.io/`. 
+On Cloud, the root endpoint for the public API is `https://api.zenhub.io/`.
 For ZenHub Enterprise, the root endpoint is `https://<zenhub_enterprise_host>/`.
 
 ## Authentication
@@ -878,8 +878,9 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 #### Notes
 
-- The endpoint takes a `repo_id` param in the URL. This is the minimum requirement for associating a release with a Board
-- Additional repository IDs can be passed in the body  `repositories` parameter
+- **CHANGE NOTICE:** Only the repositories provided in the param and the body will be added to the Release Report - change in effect mid February 2019.
+- The endpoint takes a `repo_id` param in the URL.
+- Additional repository IDs can be passed in the body `repositories` parameter
 - Any Boards not associated with the URL `repo_id` parameter, but associated with repositories in the request body `repositories` parameter will also be associated to the Release Report.
 - The user creating the release requires push permission to the repositories in the request.
 
@@ -1007,6 +1008,10 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 
 ### Add Workspaces to a Release Report
 
+#### Deprecation notice
+Endpoint to be replaced with `POST /p1/reports/release/:release_id/repositories/:repo_id` mid February 2019.
+Documentation will be updated prior to release.
+
 #### Endpoint
 
 `PATCH /p1/reports/release/:release_id/workspaces/add`
@@ -1049,6 +1054,10 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ```
 
 ### Remove Workspaces from Release Report
+
+#### Deprecation notice
+Endpoint to be replaced with `DELETE /p1/reports/release/:release_id/repositories/:repo_id` mid February 2019.
+Documentation will be updated prior to release.
 
 #### Endpoint
 
