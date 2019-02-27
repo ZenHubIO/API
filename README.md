@@ -36,8 +36,8 @@ This describes the current version of the public ZenHub API. If you have any que
   - [Get a Release Report](#get-a-release-report)
   - [Get Release Reports for a Repository](#get-release-reports-for-a-repository)
   - [Edit a Release Report](#edit-a-release-report)
-  - [Add Workspaces to a Release Report](#add-workspaces-to-a-release-report)
-  - [Remove Workspaces from a Release Report](#remove-workspaces-from-release-report)
+  - [Add a Repository to a Release Report](#add-a-repository-to-a-release-report)
+  - [Remove a Repository from a Release Report](#remove-a-repository-from-a-release-report)
 - [Release Report Issues](#release-report-issues)
   - [Get all the Issues in a Release Report](#get-all-the-issues-for-a-release-report)
   - [Add or Remove Issues from a Release Report](#add-or-remove-issues-to-or-from-a-release-report)
@@ -820,8 +820,8 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 - [Get a Release Report](#get-a-release-report)
 - [Get Release Reports for a Repository](#get-release-reports-for-a-repository)
 - [Edit a Release Report](#edit-a-release-report)
-- [Add Workspaces to a Release Report](#add-workspaces-to-a-release-report)
-- [Remove Workspaces from a Release Report](#remove-workspaces-from-release-report)
+- [Add a Repository to a Release Report](#add-a-repository-to-a-release-report)
+- [Remove a Repository from a Release Report](#remove-a-repository-from-a-release-report)
 
 ### Create a Release Report
 
@@ -841,8 +841,8 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 ------------ | ------ | -------
 |`title`|`String`|Required
 |`description`| `String`| Optional
-|`start_date`| ISO8601 date string|Optional
-|`desired_end_date`| ISO8601 date string| Optional
+|`start_date`| ISO8601 date string| Required
+|`desired_end_date`| ISO8601 date string| Required
 |`repositories`| `[Number]`| Optional
 
 #### Example Request Body
@@ -1006,97 +1006,50 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 }
 ```
 
-### Add Workspaces to a Release Report
-
-#### Deprecation notice
-Endpoint to be replaced with `POST /p1/reports/release/:release_id/repositories/:repo_id` mid February 2019.
-Documentation will be updated prior to release.
-
+### Add a Repository to a Release Report
 #### Endpoint
 
+`POST /p1/reports/release/:release_id/repository/:repo_id`
+
+#### URL Parameters
+
+|Name|Type|Comments
+------------ | ------ | -------
+|`release_id`|`String`|Required
+|`repo_id`|`Number`|Required
+
+
+#### Notes
+- On success, returns HTTP 200 OK and empty body
+
+
+### Remove a Repository from a Release Report
+#### Endpoint
+
+`DELETE /p1/reports/release/:release_id/repository/:repo_id`
+
+#### URL Parameters
+
+|Name|Type|Comments
+------------ | ------ | -------
+|`release_id`|`String`|Required
+|`repo_id`|`Number`|Required
+
+
+#### Notes
+- On success, returns HTTP 204 OK and empty body
+
+
+### Add Workspaces to a Release Report
+#### **DEPRECATED**
+#### Endpoint
 `PATCH /p1/reports/release/:release_id/workspaces/add`
 
-#### URL Parameters
-
-|Name|Type|Comments
------------- | ------ | -------
-|`release_id`|`String`|Required
-
-#### Body Parameters
-
-|Name|Type|Comments
------------- | ------ | -------
-|`repositories`|`[Number]`|Required, an array of repo IDs
-
-#### Example Request Body
-
-```json
-{ "repositories": [ 103707262 ] }
-```
-
-#### Example Response
-
-```json
-{
-  "release_id": "59d3cd520a430a6344fd3bdb",
-  "title": "Test release",
-  "description": "",
-  "start_date": "2017-10-01T19:00:00.000Z",
-  "desired_end_date": "2017-10-03T19:00:00.000Z",
-  "created_at": "2017-10-03T17:48:02.701Z",
-  "closed_at": null,
-  "state": "open",
-  "repositories": [
-    103707262,
-    105683718
-  ]
-}
-```
 
 ### Remove Workspaces from Release Report
-
-#### Deprecation notice
-Endpoint to be replaced with `DELETE /p1/reports/release/:release_id/repositories/:repo_id` mid February 2019.
-Documentation will be updated prior to release.
-
+#### **DEPRECATED**
 #### Endpoint
-
 `PATCH /p1/reports/release/:release_id/workspaces/remove`
-
-#### URL Parameters
-
-|Name|Type|Comments
------------- | ------ | -------
-|`release_id`|`String`|Required
-
-#### Body Parameters
-
-|Name|Type|Comments
------------- | ------ | -------
-|`repositories`|`[Number]`|Required, array of repo IDs
-
-#### Example Request Body
-
-```json
-{ "repositories": [ 103707262 ] }
-```
-
-#### Example Response
-```json
-{
-  "release_id": "59d3cd520a430a6344fd3bdb",
-  "title": "Test release",
-  "description": "",
-  "start_date": "2017-10-01T19:00:00.000Z",
-  "desired_end_date": "2017-10-03T19:00:00.000Z",
-  "created_at": "2017-10-03T17:48:02.701Z",
-  "closed_at": null,
-  "state": "open",
-  "repositories": [
-   105683718
-  ]
-}
-```
 
 ## Release Report Issues
 
