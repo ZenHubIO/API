@@ -1,6 +1,11 @@
 # Overview
 
-This describes the current version of the public ZenHub API. If you have any questions or feedback, please contact [support](mailto:support@zenhub.com).
+The documentation below covers how to leverage the ZenHub API. 
+
+## Getting support
+If you have any questions or feedback, contact [support](mailto:support@zenhub.com) for support. You can also submit a feature request [here](https://portal.productboard.com/zenhub).
+
+---
 
 [Overview](#overview)
 
