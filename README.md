@@ -1,5 +1,7 @@
 # Getting support
-If you have any questions or feedback, contact [support](mailto:support@zenhub.com) for support. You can also submit a feature request [here](https://portal.productboard.com/zenhub).
+If you have any questions or feedback, **contact [support](mailto:support@zenhub.com) for support**. The ZenHub Board for this repo has been sunset - all support inquiries should be submitted directly through the email above.
+
+You can also submit a feature request [here](https://portal.productboard.com/zenhub).
 
 # Overview
 
