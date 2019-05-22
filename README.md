@@ -9,6 +9,7 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
 
 - [Root Endpoint](#root-endpoint)
 - [Authentication](#authentication)
+- [Content-Type: JSON](#content-type-json)
 - [API Rate Limit](#api-rate-limit)
 - [Errors](#errors)
 
@@ -70,6 +71,15 @@ Alternatively, you can choose to send the token in the URL using the `access_tok
 
 - Each user may only have one token, so generating a new token will invalidate previously created tokens.
 - For ZenHub Enterprise users, please follow the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`
+
+## Content-Type: JSON
+
+Our REST API only supports JSON content for requests with a body and for responses.
+For each request containing a body with JSON, you will need to attach the header `'Content-Type: application/json'` with your request. For example, using `curl` it’d be:
+
+```sh
+curl -H 'Content-Type: application/json' URL
+```
 
 ## API Rate Limit
 
