@@ -28,7 +28,7 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
   - [Convert an Epic to an Issue](#convert-an-epic-to-an-issue)
   - [Convert an Issue to Epic](#convert-issue-to-epic)
   - [Add or Remove Issues from an Epic](#add-or-remove-issues-to-epic)
-- [Workspaces](#workspaces)
+- [Workspaces](#workspace)
   - [Get ZenHub Workspaces for a repository](#get-zenhub-workspaces-for-a-repository)
   - [Get a ZenHub Board for a repository](#get-a-zenhub-board-for-a-repository)
   - [Get the oldest ZenHub Board for a repository](#get-the-oldest-zenhub-board-for-a-repository)
@@ -640,7 +640,7 @@ Bulk add or remove issues to an Epic. The result returns which issue was added o
 - `add_issues` shows which issues were added in this operation.
 - Returns a `404` if the Epic doesn’t exist
 
-## Workspaces
+## Workspace
 
 - [Get ZenHub Workspaces for a repository](#get-zenhub-workspaces-for-a-repository)
 - [Get a ZenHub Board for a repository](#get-a-zenhub-board-for-a-repository)
