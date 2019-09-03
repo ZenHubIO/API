@@ -1420,4 +1420,4 @@ app.post('*', function(req, res) {
 
 # Contact us
 
-We’d love to hear from you. If you have any questions, concerns, or ideas related to the ZenHub API, open an issue in our [Support repo](https://github.com/ZenHubIO/support/issues#boards) or find us on [Twitter](http://www.twitter.com/ZenHubHQ).
+We’d love to hear from you. If you have any questions, concerns, or ideas related to the ZenHub API, please reach us at [support@zenhub.com](mailto:support@zenhub.com) or find us on [Twitter](https://twitter.com/zenhubstatus).
