@@ -58,7 +58,7 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
 
 ## Root Endpoint
 
-On Cloud, the root endpoint for the public API is `https://api.zenhub.io/`.
+On Cloud, the root endpoint for the public API is `https://api.zenhub.com/`.
 For ZenHub Enterprise, the root endpoint is `https://<zenhub_enterprise_host>/`.
 
 ## Authentication
