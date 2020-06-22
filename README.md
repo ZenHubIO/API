@@ -173,8 +173,9 @@ Get the data for a specific issue.
 
 - `plus_ones[].user_id` was removed from the response.
 - `pipeline` object references the oldest Workspace pipeline this issue is in.
+  - **NOTE:** If an issue's status is closed, the `pipeline` value will describe the Pipeline that the issue was in prior to the issue being closed. The ZenHub API does not consider the "Closed" Pipeline to be a distinct Pipeline at this time and you should **not** use the Pipeline value to determine whether or not an issue is closed or open (use `status` instead).
+  - **NOTE:** Reopened issues might take up to one minute to show up in the correct Pipeline.
 - `pipelines` contains all pipelines in all Workspaces this issue is in.
-- Closed issues might take up to one minute to show up in the Closed Pipeline. Similarly, reopened issues might take up to one minute to show in the correct Pipeline.
 
 ### Get Issue Events
 
