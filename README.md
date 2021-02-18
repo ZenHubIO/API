@@ -112,6 +112,7 @@ The ZenHub API can return the following errors:
 #### Notes
 
 - `repo_id` is the ID of the repository, not its full name. For example, the ID of the `ZenHubIO/API` repository is `47655910`. To find out the ID of your repository, use [GitHub’s API](https://developer.github.com/v3/repos/#get), or copy it from the URL of the Board (for this repo, the Board URL is https://github.com/ZenHubIO/API#boards?repos=47655910).
+- `workspace_id` is the ID of the ZenHub Workspace. This is found in the URL for the Workspace after the name of the workspace. For example, the `workspace_id` for `https://app.zenhub.com/workspaces/workflows---product--design-workspace-5f6b5c9ab4fd7d76a3e5b7d8/board?` is `5f6b5c9ab4fd7d76a3e5b7d8`.
 
 ## Issues
 
