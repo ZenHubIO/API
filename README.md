@@ -58,12 +58,24 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
 
 ## Root Endpoint
 
-On Cloud, the root endpoint for the public API is `https://api.zenhub.com/`.
-For ZenHub Enterprise, the root endpoint is `https://<zenhub_enterprise_host>/`.
+The ZenHub API root endpoint for Cloud is different than that of Enterprise and has also changed across Enterprise versions. Please refer to the table below for the appropriate endpoint.
+
+ZenHub Version | API Root Endpoint
+--- | ---
+Cloud | `https://api.zenhub.com/`
+Enterprise 2 | `https://<zenhub_enterprise_host>/`
+Enterprise 3 | `https://<zenhub_enterprise_host>/api/`
 
 ## Authentication
 
-All requests to the API need an API token. Generate a token in the **API Tokens** section of your ZenHub [Dashboard](https://app.zenhub.com/dashboard/tokens) (or `https://<zenhub_enterprise_host>/app/dashboard/tokens` for ZenHub Enterprise). The token is sent in the `X-Authentication-Token` header. For example, using `curl` it’d be:
+All requests to the API need an API token. Generate a token in the **API Tokens** section of your ZenHub [Dashboard](https://app.zenhub.com/dashboard/tokens) (for ZenHub Enterprise, refer to the table below for the proper link). 
+
+ZenHub Enterprise Version | Auth Token Generation Page
+--- | ---
+Enterprise 2 | `https://<zenhub_enterprise_host>/app/dashboard/tokens`
+Enterprise 3 | `https://<zenhub_enterprise_host>/dashboard/tokens`
+
+The token is sent in the `X-Authentication-Token` header. For example, using `curl` it would be:
 
 ```sh
 curl -H 'X-Authentication-Token: TOKEN' URL
