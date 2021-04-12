@@ -86,7 +86,6 @@ Alternatively, you can choose to send the token in the URL using the `access_tok
 #### Notes
 
 - Each user may only have one token, so generating a new token will invalidate previously created tokens.
-- For ZenHub Enterprise users, please follow the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`
 
 ## Content-Type: JSON
 
