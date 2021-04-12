@@ -58,7 +58,7 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
 
 ## Root Endpoint
 
-The ZenHub API root endpoint for Cloud is different than that of Enterprise and has also changed across Enterprise versions. Please refer to the table below for the appropriate endpoint.
+The ZenHub API root endpoint for Cloud is different than that of ZenHub On-Premise Enterprise instances and has also changed across Enterprise versions. Please refer to the table below for the appropriate endpoint.
 
 ZenHub Version | API Root Endpoint
 --- | ---
