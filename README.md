@@ -53,6 +53,7 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
 [Webhooks](#webhooks)
 
 - [Custom Webhooks](#custom-webhooks)
+  - [Content Type: urlencoded](#content-type-urlencoded)
 
 [Contact Us](#contact-us)
 
@@ -1348,7 +1349,14 @@ For instructions, you'll notice the `How to create a webhook` link changes dynam
 
 ### Custom webhooks
 
-Our custom webhook sends a POST request to your webhook for multiple events that occur on your ZenHub board:
+Our custom webhook sends a POST request to your webhook for multiple events that occur on your ZenHub board. See below for examples of the events and data that they will contain. Please note that the content type in the examples has been written in JSON, however the actual data is sent in **x-www-form-urlencoded** format.
+
+#### Content Type: urlencoded
+
+The POST request is sent in the **x-www-form-urlencoded** format. 
+
+Example:
+```field1=value1&field2=value2```
 
 #### Issue transfer
 
@@ -1362,6 +1370,8 @@ Our custom webhook sends a POST request to your webhook for multiple events that
   "issue_number": "618",
   "issue_title": "ZenHub Change Log",
   "to_pipeline_name": "New Issues",
+  "workspace_id": "603fc3e575de63001cc163f9",
+  "workspace_name" "My Workspace",
   "from_pipeline_name": "Discussion"
 }
 ```
@@ -1408,7 +1418,9 @@ Our custom webhook sends a POST request to your webhook for multiple events that
   "issue_title": "ZenHub Change Log",
   "to_pipeline_name": "Backlog",
   "from_position": "4",
-  "to_position": "0"
+  "to_position": "0",
+  "workspace_id": "603fc3e575de63001cc163f9",
+  "workspace_name" "My Workspace"
 }
 ```
 
