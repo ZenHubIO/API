@@ -1371,7 +1371,7 @@ Example:
   "issue_title": "ZenHub Change Log",
   "to_pipeline_name": "New Issues",
   "workspace_id": "603fc3e575de63001cc163f9",
-  "workspace_name" "My Workspace",
+  "workspace_name": "My Workspace",
   "from_pipeline_name": "Discussion"
 }
 ```
