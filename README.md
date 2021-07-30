@@ -53,17 +53,30 @@ You can also submit a feature request [here](https://portal.productboard.com/zen
 [Webhooks](#webhooks)
 
 - [Custom Webhooks](#custom-webhooks)
+  - [Content Type: urlencoded](#content-type-urlencoded)
 
 [Contact Us](#contact-us)
 
 ## Root Endpoint
 
-On Cloud, the root endpoint for the public API is `https://api.zenhub.com/`.
-For ZenHub Enterprise, the root endpoint is `https://<zenhub_enterprise_host>/`.
+The ZenHub API root endpoint for Cloud is different than that of ZenHub On-Premise Enterprise instances and has also changed across Enterprise versions. Please refer to the table below for the appropriate endpoint.
+
+ZenHub Version | API Root Endpoint
+--- | ---
+Cloud | `https://api.zenhub.com/`
+Enterprise 2 | `https://<zenhub_enterprise_host>/`
+Enterprise 3 | `https://<zenhub_enterprise_host>/api/`
 
 ## Authentication
 
-All requests to the API need an API token. Generate a token in the **API Tokens** section of your ZenHub [Dashboard](https://app.zenhub.com/dashboard/tokens) (or `https://<zenhub_enterprise_host>/app/dashboard/tokens` for ZenHub Enterprise). The token is sent in the `X-Authentication-Token` header. For example, using `curl` it’d be:
+All requests to the API need an API token. Generate a token in the **API Tokens** section of your ZenHub [Dashboard](https://app.zenhub.com/dashboard/tokens) (for ZenHub Enterprise, refer to the table below for the proper link). 
+
+ZenHub Enterprise Version | Auth Token Generation Page
+--- | ---
+Enterprise 2 | `https://<zenhub_enterprise_host>/app/dashboard/tokens`
+Enterprise 3 | `https://<zenhub_enterprise_host>/dashboard/tokens`
+
+The token is sent in the `X-Authentication-Token` header. For example, using `curl` it would be:
 
 ```sh
 curl -H 'X-Authentication-Token: TOKEN' URL
@@ -74,7 +87,6 @@ Alternatively, you can choose to send the token in the URL using the `access_tok
 #### Notes
 
 - Each user may only have one token, so generating a new token will invalidate previously created tokens.
-- For ZenHub Enterprise users, please follow the instructions in `https://<zenhub_enterprise_host>/setup/howto/api`
 
 ## Content-Type: JSON
 
@@ -1337,7 +1349,14 @@ For instructions, you'll notice the `How to create a webhook` link changes dynam
 
 ### Custom webhooks
 
-Our custom webhook sends a POST request to your webhook for multiple events that occur on your ZenHub board:
+Our custom webhook sends a POST request to your webhook for multiple events that occur on your ZenHub board. See below for examples of the events and data that they will contain. Please note that the content type in the examples has been written in JSON, however the actual data is sent in **x-www-form-urlencoded** format.
+
+#### Content Type: urlencoded
+
+The POST request is sent in the **x-www-form-urlencoded** format. 
+
+Example:
+```field1=value1&field2=value2```
 
 #### Issue transfer
 
@@ -1351,6 +1370,8 @@ Our custom webhook sends a POST request to your webhook for multiple events that
   "issue_number": "618",
   "issue_title": "ZenHub Change Log",
   "to_pipeline_name": "New Issues",
+  "workspace_id": "603fc3e575de63001cc163f9",
+  "workspace_name": "My Workspace",
   "from_pipeline_name": "Discussion"
 }
 ```
@@ -1397,7 +1418,9 @@ Our custom webhook sends a POST request to your webhook for multiple events that
   "issue_title": "ZenHub Change Log",
   "to_pipeline_name": "Backlog",
   "from_position": "4",
-  "to_position": "0"
+  "to_position": "0",
+  "workspace_id": "603fc3e575de63001cc163f9",
+  "workspace_name" "My Workspace"
 }
 ```
 
