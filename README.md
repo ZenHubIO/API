@@ -1,3 +1,7 @@
+# ⚠️ Maintenance 
+This API is no longer actively maintained and has a limited feature set. Please take a look at our updated API and documentation available at https://developers.zenhub.com
+
+
 # Getting support
 
 If you have any questions or feedback, **contact [support](mailto:support@zenhub.com) for support**. The ZenHub Board for this repo has been sunset - all support inquiries should be submitted directly through the email above.
