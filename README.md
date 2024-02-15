@@ -1,6 +1,7 @@
-# ⚠️ Maintenance 
-This API is no longer actively maintained and has a limited feature set. Please take a look at our updated API and documentation available at https://developers.zenhub.com
+# ⚠️ Deprecation Notice 
 
+> [!WARNING]
+> This API has not been updated since 2021 is scheduled for deprecation. Please use our new GraphQL API at https://developers.zenhub.com
 
 # Getting support
 
